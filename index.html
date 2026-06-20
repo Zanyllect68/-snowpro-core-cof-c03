@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SnowPro Core COF-C03 — Recursos de Estudio</title>
+<meta name="description" content="Repositorio completo de estudio para la certificación SnowPro Core (COF-C03). Apuntes, guías DORA, plan de estudio, calendario interactivo y preguntas tipo examen.">
+<meta property="og:title" content="SnowPro Core COF-C03 — Recursos de Estudio">
+<meta property="og:description" content="Repositorio completo de estudio para la certificación SnowPro Core (COF-C03). Apuntes, guías DORA, plan de estudio, calendario interactivo y preguntas tipo examen.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0f1117">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --d1: #3b82f6;      --d1-bg: rgba(59,130,246,0.12);      --d1-border: rgba(59,130,246,0.3);
+  --d2: #ef4444;      --d2-bg: rgba(239,68,68,0.12);       --d2-border: rgba(239,68,68,0.3);
+  --d3: #22c55e;      --d3-bg: rgba(34,197,94,0.12);       --d3-border: rgba(34,197,94,0.3);
+  --d4: #f97316;      --d4-bg: rgba(249,115,22,0.12);      --d4-border: rgba(249,115,22,0.3);
+  --d5: #a855f7;      --d5-bg: rgba(168,85,247,0.12);      --d5-border: rgba(168,85,247,0.3);
+  --lab: #06b6d4;     --lab-bg: rgba(6,182,212,0.12);       --lab-border: rgba(6,182,212,0.3);
+  --exam: #eab308;    --exam-bg: rgba(234,179,8,0.14);      --exam-border: rgba(234,179,8,0.3);
+  --review: #6b7280;  --review-bg: rgba(107,114,128,0.10);  --review-border: rgba(107,114,128,0.2);
+  --bg: #0f1117;      --card: #1a1d2e;      --border: #262a3a;
+  --text: #e2e8f0;    --text-muted: #8892a6;  --accent: #60a5fa;
+  --radius: 12px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg); color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 1320px; margin: 0 auto; padding: 0 20px; }
+
+/* ===== HERO ===== */
+.hero {
+  text-align: center; padding: 48px 0 28px;
+  border-bottom: 1px solid var(--border); margin-bottom: 32px;
+}
+.hero h1 {
+  font-size: 2.2rem; font-weight: 700; letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; margin-bottom: 8px;
+}
+.hero .subtitle { color: var(--text-muted); font-size: 1rem; margin-bottom: 6px; }
+.hero .exam-meta {
+  display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;
+  font-size: 0.78rem; color: var(--text-muted); margin-bottom: 20px;
+}
+.hero .exam-meta span { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 100px; padding: 4px 14px; }
+.hero .nav-links {
+  display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;
+}
+.hero .nav-links a {
+  color: var(--accent); font-size: 0.78rem; text-decoration: none;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+  border-radius: 100px; padding: 6px 18px;
+  transition: all 0.2s;
+}
+.hero .nav-links a:hover { background: rgba(96,165,250,0.1); border-color: rgba(96,165,250,0.3); }
+.hero .nav-links a.outline { color: var(--text-muted); }
+.hero .nav-links a.outline:hover { color: var(--text); border-color: rgba(255,255,255,0.15); }
+
+/* ===== STRUCTURE CARDS ===== */
+.structure { margin-bottom: 36px; }
+.structure h2 {
+  font-size: 1.1rem; font-weight: 600; margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+.structure .grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px;
+}
+.structure .card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 14px 16px; text-decoration: none; color: var(--text);
+  transition: all 0.2s; display: flex; flex-direction: column; gap: 4px;
+}
+.structure .card:hover { border-color: rgba(255,255,255,0.12); transform: translateY(-1px); }
+.structure .card .title { font-weight: 600; font-size: 0.82rem; display: flex; align-items: center; gap: 6px; }
+.structure .card .desc { font-size: 0.68rem; color: var(--text-muted); line-height: 1.4; }
+.structure .card .count { font-size: 0.62rem; color: var(--text-muted); margin-top: 2px; }
+.structure .card .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+
+/* ===== CALENDAR SECTION ===== */
+.calendar-section { margin-bottom: 32px; }
+.calendar-section h2 {
+  font-size: 1.1rem; font-weight: 600; margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+.legend { display: flex; gap: 5px; margin-bottom: 18px; flex-wrap: wrap; }
+.legend-item {
+  display: flex; align-items: center; gap: 4px; font-size: 0.65rem;
+  background: var(--card); border: 1px solid var(--border); border-radius: 100px;
+  padding: 3px 10px 3px 6px; color: var(--text-muted);
+  transition: border-color 0.15s; cursor: default;
+}
+.legend-item:hover { border-color: rgba(255,255,255,0.12); }
+.legend-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 18px; }
+.stat-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 12px 10px; text-align: center; transition: border-color 0.2s;
+}
+.stat-card:hover { border-color: rgba(255,255,255,0.08); }
+.stat-card .num { font-size: 1.3rem; font-weight: 700; display: block; letter-spacing: -0.02em; }
+.stat-card .label { font-size: 0.62rem; color: var(--text-muted); margin-top: 1px; }
+
+.progress-bar { margin-bottom: 18px; }
+.progress-bar .bar {
+  background: var(--card); border: 1px solid var(--border); border-radius: 100px;
+  height: 5px; overflow: hidden;
+}
+.progress-bar .fill {
+  height: 100%; border-radius: 100px;
+  background: linear-gradient(90deg, #3b82f6, #a78bfa);
+  transition: width 0.5s ease;
+}
+.progress-bar .labels { display: flex; justify-content: space-between; margin-top: 4px; font-size: 0.62rem; color: var(--text-muted); }
+
+.nav-cal {
+  display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 14px;
+}
+.nav-cal button {
+  background: var(--card); color: var(--text); border: 1px solid var(--border);
+  padding: 7px 14px; border-radius: 8px; cursor: pointer; font-size: 0.78rem;
+  font-family: inherit; transition: all 0.15s;
+}
+.nav-cal button:hover { background: #262a3a; border-color: rgba(255,255,255,0.12); }
+.nav-cal .week-label { font-size: 0.88rem; font-weight: 600; min-width: 190px; text-align: center; }
+.nav-cal .today-btn {
+  background: linear-gradient(135deg, rgba(59,130,246,0.12), rgba(168,85,247,0.12));
+  border: 1px solid rgba(139,92,246,0.2); color: #a78bfa;
+}
+.nav-cal .today-btn:hover { background: linear-gradient(135deg, rgba(59,130,246,0.22), rgba(168,85,247,0.22)); }
+
+.week-indicator { text-align: center; margin-bottom: 8px; font-size: 0.66rem; color: var(--text-muted); }
+.week-indicator strong { color: var(--text); }
+
+.main-layout { display: grid; grid-template-columns: 1fr 320px; gap: 20px; align-items: start; }
+.calendar-column { min-width: 0; }
+.panel-column { position: sticky; top: 20px; }
+
+.week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 14px; }
+.day-header {
+  text-align: center; font-weight: 500; font-size: 0.62rem; padding: 5px 2px;
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em;
+}
+.day-cell {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 5px; min-height: 95px; display: flex; flex-direction: column;
+  font-size: 0.72rem; transition: border-color 0.2s, box-shadow 0.2s; position: relative;
+  cursor: pointer;
+}
+.day-cell:hover { border-color: rgba(255,255,255,0.15); box-shadow: 0 0 0 1px rgba(255,255,255,0.05); }
+.day-cell.empty { background: transparent; border-color: transparent; min-height: 0; cursor: default; box-shadow: none; }
+.day-cell .day-num { font-weight: 600; font-size: 0.72rem; margin-bottom: 2px; color: var(--text); }
+.day-cell .day-num.weekend { color: #f87171; }
+.day-cell .day-num.today-indicator {
+  background: linear-gradient(135deg, #3b82f6, #a78bfa);
+  color: #fff; width: 22px; height: 22px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: 0.68rem;
+}
+.day-cell .day-num.faded { opacity: 0.2; }
+.day-cell .month-label {
+  position: absolute; top: 4px; right: 5px; font-size: 0.52rem; color: var(--text-muted); opacity: 0.35;
+}
+
+.event {
+  padding: 3px 4px; border-radius: 4px; margin-top: 2px;
+  font-size: 0.6rem; line-height: 1.2; cursor: pointer;
+  transition: opacity 0.15s; flex-shrink: 0;
+  border-left-width: 2px; border-left-style: solid;
+}
+.event:hover { opacity: 0.85; }
+.event strong { display: block; font-weight: 600; font-size: 0.62rem; margin-bottom: 1px; }
+.event .meta { display: flex; gap: 4px; align-items: center; font-size: 0.55rem; }
+.event .time { opacity: 0.6; }
+
+.domain-d1 { background: var(--d1-bg); border-left-color: var(--d1); }
+.domain-d2 { background: var(--d2-bg); border-left-color: var(--d2); }
+.domain-d3 { background: var(--d3-bg); border-left-color: var(--d3); }
+.domain-d4 { background: var(--d4-bg); border-left-color: var(--d4); }
+.domain-d5 { background: var(--d5-bg); border-left-color: var(--d5); }
+.domain-lab { background: var(--lab-bg); border-left-color: var(--lab); }
+.domain-exam { background: var(--exam-bg); border-left-color: var(--exam); }
+.domain-review { background: var(--review-bg); border-left-color: var(--review); }
+
+.panel {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 20px; min-height: 300px;
+}
+.panel .empty {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 250px; text-align: center; color: var(--text-muted); font-size: 0.78rem;
+}
+.panel .empty .icon { font-size: 2rem; margin-bottom: 12px; opacity: 0.25; }
+.panel .empty .hint { font-size: 0.68rem; margin-top: 6px; opacity: 0.5; }
+.panel .panel-header { margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start; }
+.panel .panel-header h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; }
+.panel .panel-header .domain { font-size: 0.65rem; opacity: 0.6; }
+.panel .panel-header .time { font-size: 0.68rem; color: var(--text-muted); margin-top: 3px; }
+.panel .panel-section { margin-bottom: 12px; }
+.panel .panel-section h4 {
+  font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+  color: var(--text-muted); margin-bottom: 5px;
+}
+.panel .panel-section ul { list-style: none; padding: 0; }
+.panel .panel-section li {
+  font-size: 0.72rem; padding: 5px 8px; border-radius: 6px;
+  background: rgba(255,255,255,0.03); margin-bottom: 3px;
+  border-left: 2px solid var(--border);
+}
+.panel .panel-section li strong { color: var(--text); }
+.panel .panel-section li .file { display: block; font-size: 0.62rem; color: var(--accent); margin-top: 1px; }
+.panel .panel-section li .file:hover { text-decoration: underline; }
+.panel .detail { font-size: 0.72rem; color: var(--text-muted); line-height: 1.5; }
+.panel .close-btn {
+  background: none; border: none; color: var(--text-muted); font-size: 1.3rem;
+  cursor: pointer; padding: 0 4px; line-height: 1;
+}
+.panel .close-btn:hover { color: var(--text); }
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center; padding: 32px 0; margin-top: 20px;
+  border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.72rem;
+}
+.footer a { color: var(--accent); text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .main-layout { grid-template-columns: 1fr; }
+  .panel-column { position: static; }
+  .panel { min-height: auto; }
+  .structure .grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+}
+@media (max-width: 700px) {
+  .hero { padding: 28px 0 20px; }
+  .hero h1 { font-size: 1.4rem; }
+  .week-grid { gap: 3px; }
+  .day-cell { min-height: 65px; padding: 3px; }
+  .day-cell .day-num { font-size: 0.62rem; }
+  .event { font-size: 0.52rem; padding: 2px 3px; }
+  .event strong { font-size: 0.55rem; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .nav-cal .week-label { min-width: 120px; font-size: 0.72rem; }
+  .structure .grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .day-cell { min-height: 50px; padding: 2px; }
+  .event .meta { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="hero">
+    <h1>SnowPro Core &mdash; COF-C03</h1>
+    <p class="subtitle">Recursos completos para la certificaci&oacute;n SnowPro Core</p>
+    <div class="exam-meta">
+      <span>100 preguntas</span>
+      <span>115 min</span>
+      <span>750/1000</span>
+      <span>$175 USD</span>
+      <span>46 d&iacute;as &middot; 60 h</span>
+    </div>
+    <div class="nav-links">
+      <a href="General/apuntes_snowpro_core.md">Apuntes completos</a>
+      <a href="General/guia_dora_badges.md">Gu&iacute;a DORA por temas</a>
+      <a href="General/guia_completa_COF-C03.md">Gu&iacute;a completa</a>
+      <a href="General/plan_horario_detallado.md">Plan horario</a>
+      <a href="General/informe_snowflake.md">30 preguntas tipo</a>
+      <a href="General/Tutorial Snowflake - Principiante a Experto.md">Tutorial</a>
+      <a href="README.md" class="outline">README</a>
+    </div>
+  </div>
+
+  <div class="structure">
+    <h2>Estructura del repositorio</h2>
+    <div class="grid">
+      <a href="01_Arquitectura/" class="card">
+        <span class="title"><span class="dot" style="background:#3b82f6"></span> Arquitectura</span>
+        <span class="desc">3 capas, microparticiones, warehouses, tablas, time travel, ediciones</span>
+        <span class="count">5 archivos &middot; 31% del examen</span>
+      </a>
+      <a href="02_Gobernanza/" class="card">
+        <span class="title"><span class="dot" style="background:#ef4444"></span> Gobernanza</span>
+        <span class="desc">RBAC, masking, network policies, resource monitors, cifrado</span>
+        <span class="count">10 archivos &middot; 20% del examen</span>
+      </a>
+      <a href="03_Carga_Descarga/" class="card">
+        <span class="title"><span class="dot" style="background:#22c55e"></span> Carga y Descarga</span>
+        <span class="desc">Stages, COPY INTO, formatos, semiestructurados, Snowpipe</span>
+        <span class="count">2 archivos &middot; 18% del examen</span>
+      </a>
+      <a href="04_Optimizacion/" class="card">
+        <span class="title"><span class="dot" style="background:#f97316"></span> Optimizaci&oacute;n</span>
+        <span class="desc">Dynamic tables, streams, tasks, ventanas, EXPLAIN</span>
+        <span class="count">En apuntes generales &middot; 21% del examen</span>
+      </a>
+      <a href="05_Colaboracion/" class="card">
+        <span class="title"><span class="dot" style="background:#a855f7"></span> Colaboraci&oacute;n</span>
+        <span class="desc">Data Sharing, Reader Accounts, Marketplace, Auto-fulfillment, Data Clean Rooms</span>
+        <span class="count">3 archivos &middot; 10% del examen</span>
+      </a>
+      <a href="General/" class="card">
+        <span class="title"><span class="dot" style="background:#6b7280"></span> General</span>
+        <span class="desc">Apuntes maestros, gu&iacute;as, plan horario, informe, tutorial principiante</span>
+        <span class="count">15 archivos</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="calendar-section">
+    <h2>Calendario de estudio &middot; 1 jul &ndash; 15 ago 2026</h2>
+
+    <div class="legend">
+      <span class="legend-item"><span class="legend-dot" style="background:var(--d1)"></span> D1: Arquitectura 31%</span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--d2)"></span> D2: Gobernanza 20%</span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--d3)"></span> D3: Carga 18%</span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--d4)"></span> D4: Optimizaci&oacute;n 21%</span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--d5)"></span> D5: Colaboraci&oacute;n 10%</span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--lab)"></span> Lab DORA</span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--exam)"></span> Simulacro</span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--review)"></span> Repaso</span>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><span class="num" id="statDays">46</span><span class="label">D&iacute;as</span></div>
+      <div class="stat-card"><span class="num">60</span><span class="label">Horas totales</span></div>
+      <div class="stat-card"><span class="num">4</span><span class="label">Badges DORA</span></div>
+      <div class="stat-card"><span class="num" id="statProgress">0%</span><span class="label" id="statProgressLabel">completado</span></div>
+    </div>
+
+    <div class="progress-bar">
+      <div class="bar"><div class="fill" id="progressFill" style="width:0%"></div></div>
+      <div class="labels"><span id="progressLabel">0% completado</span><span id="progressDays">0 / 46 d&iacute;as</span></div>
+    </div>
+
+    <div class="nav-cal">
+      <button onclick="changeWeek(-1)">&larr; Semana</button>
+      <span class="week-label" id="weekLabel"></span>
+      <button onclick="changeWeek(1)">Semana &rarr;</button>
+      <button class="today-btn" onclick="goCurrentWeek()">Ir a hoy</button>
+    </div>
+
+    <div class="main-layout">
+      <div class="calendar-column">
+        <div id="weekIndicator" class="week-indicator"></div>
+        <div id="calendar"></div>
+      </div>
+      <div class="panel-column">
+        <div class="panel" id="panel">
+          <div class="empty" id="panelEmpty">
+            <div class="icon">&#128214;</div>
+            <div>Selecciona un d&iacute;a</div>
+            <div class="hint">Haz clic en cualquier evento del calendario para ver los apuntes relacionados</div>
+          </div>
+          <div id="panelContent" style="display:none;">
+            <div class="panel-header">
+              <div>
+                <h3 id="panelTitle"></h3>
+                <div class="domain" id="panelDomain"></div>
+                <div class="time" id="panelTime"></div>
+              </div>
+              <button class="close-btn" onclick="closePanel()">&times;</button>
+            </div>
+            <div class="panel-section">
+              <h4>Contenido del tema</h4>
+              <div class="detail" id="panelDetail"></div>
+            </div>
+            <div class="panel-section">
+              <h4>Apuntes relacionados</h4>
+              <ul id="panelRefs"></ul>
+            </div>
+            <div class="panel-section">
+              <h4>Pr&aacute;ctica recomendada</h4>
+              <ul id="panelPractice"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Material de estudio para <a href="https://learn.snowflake.com/">SnowPro Core COF-C03</a> &middot;
+    Recursos basados en documentaci&oacute;n oficial de Snowflake y DataCamp &middot;
+    <a href="README.md">Documentaci&oacute;n completa</a>
+  </div>
+
+</div>
+
+<script>
+const events = [
+  {day:1, title:"Arquitectura 3 capas", domain:"d1", time:"1.5h",
+    detail:"Cloud Services, Compute, Storage. Cada capa se escala independientemente.",
+    mods:[
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 1 — Microparticiones y Clustering"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 1.0 — Arquitectura"},
+      {file:"General/informe_snowflake.md", mod:"Preg 03 — Snowsight | Preg 27 — Cloud Services"}
+    ],
+    practice:"Diagrama las 3 capas: Cloud Services (autenticación, metadatos), Compute (warehouses), Storage (microparticiones en S3/GCS/Azure)."},
+  {day:2, title:"Microparticiones", domain:"d1", time:"1.5h",
+    detail:"Unidades inmutables de ~50-500 MB comprimidos. Metadatos: min/max, null count.",
+    mods:[
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 1 — Microparticiones y Clustering"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 1.0 — Microparticiones"}
+    ],
+    practice:"CREATE TABLE demo (id INT, val STRING); INSERT INTO demo VALUES (1,'a'),(2,'b'); SELECT SYSTEM$CLUSTERING_DEPTH('demo');"},
+  {day:3, title:"Partition Pruning & Clustering", domain:"d1", time:"1.5h",
+    detail:"Pruning automático: Snowflake elimina microparticiones irrelevantes usando metadatos. Clustering keys opcional (>1TB). Auto-clustering tiene costo adicional.",
+    mods:[
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 1 — Partition pruning, clustering keys, auto-clustering, profundidad de clúster"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 4.0 — Clustering y partition pruning"}
+    ],
+    practice:"ALTER TABLE orders CLUSTER BY (customer_id, order_date); SELECT SYSTEM$CLUSTERING_INTERVAL('orders', 'order_date');"},
+  {day:4, title:"Time Travel", domain:"d1", time:"1.5h",
+    detail:"Configurable 0-90 días (default 1 día). AT(TIMESTAMP), BEFORE(STATEMENT), OFFSET.",
+    mods:[
+      {file:"General/informe_snowflake.md", mod:"Preg 04 — Período retención default 1 día"},
+      {file:"General/informe_snowflake.md", mod:"Preg 16 — Parámetro DATA_RETENTION_TIME_IN_DAYS"},
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 4 — Fail-safe (7 días fijo vs Time Travel)"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 1.0 — Time Travel y Fail-safe"}
+    ],
+    practice:"SELECT * FROM t AT(TIMESTAMP => '2026-07-01 10:00:00'); ALTER TABLE t SET DATA_RETENTION_TIME_IN_DAYS = 3;"},
+  {day:5, title:"Fail-safe", domain:"d1", time:"1h",
+    detail:"7 días fijos NO configurables. Solo Snowflake puede acceder. Después de Time Travel. Costo incluido en almacenamiento.",
+    mods:[
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 4 — Fail-safe: duración, costo, diferencia con Time Travel"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 1.0 — Time Travel y Fail-safe"}
+    ],
+    practice:"Dibuja la línea de tiempo: Tabla activa → Time Travel (1-90 días) → Fail-safe (7 días) → Datos eliminados permanentemente."},
+  {day:6, title:"Zero-copy Cloning", domain:"d1", time:"1.5h",
+    detail:"Instantáneo, sin copia física. Solo metadatos. Funciona con tablas, esquemas y bases de datos completas.",
+    mods:[
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 3 — Clonación Zero-Copy"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 1.0 — Zero-copy cloning"}
+    ],
+    practice:"CREATE TABLE t2 CLONE t1; CREATE TABLE t3 CLONE t1 AT(TIMESTAMP => '2026-07-02'); CREATE SCHEMA s2 CLONE s1;"},
+  {day:7, title:"Tipos de tabla", domain:"d1", time:"1h",
+    detail:"Permanente (indefinida, 1-90d TT), Transitoria (indefinida, max 1d TT), Temporal (solo sesión, max 1d TT).",
+    mods:[
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 5 — Tablas Temporales y Transitorias (tabla comparativa)"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 1.0 — Tipos de tablas"}
+    ],
+    practice:"CREATE TEMPORARY TABLE tmp (i INT); CREATE TRANSIENT TABLE trn (i INT); Verificar duración de cada una."},
+  {day:8, title:"Warehouses (sizing, suspend)", domain:"d1", time:"1.5h",
+    detail:"X-Small a 6X-Large. AUTO_SUSPEND (minutos), AUTO_RESUME. Multi-cluster warehouses. Resource Monitors controlan créditos.",
+    mods:[
+      {file:"General/informe_snowflake.md", mod:"Preg 05 — Auto-suspend reduce costos"},
+      {file:"General/informe_snowflake.md", mod:"Preg 22 — Dimensionamiento en nivel de Procesamiento"},
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 7 — Resource Monitors"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 1.0 — Almacenes virtuales"}
+    ],
+    practice:"CREATE WAREHOUSE my_wh WITH WAREHOUSE_SIZE='XSMALL' AUTO_SUSPEND=5 AUTO_RESUME=TRUE;"},
+  {day:9, title:"Ediciones Snowflake", domain:"d1", time:"1h",
+    detail:"Standard (1d TT), Enterprise (90d TT, multi-cluster, mat views), Business Critical (HIPAA), VPS (aislado, Private Link).",
+    mods:[
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 8 — Ediciones de Snowflake (tabla completa)"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 1.0 — Ediciones"}
+    ],
+    practice:"Crea tabla comparativa: qué incluye cada edición (TT, clustering, HIPAA, Private Link, etc.)."},
+  {day:10, title:"Caching", domain:"d1", time:"1h",
+    detail:"Result Cache (24h, no necesita warehouse), Metadata Cache (Cloud Services, siempre disponible), Local Disk Cache (SSD del warehouse mientras activo).",
+    mods:[
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 2 — Caching (tipos, alcance, duración)"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 1.0 — Caching"}
+    ],
+    practice:"Corre SELECT COUNT(*) FROM t dos veces. Luego USE_CACHED_RESULT = FALSE; y compara tiempos."},
+  {day:11, title:"Snowsight", domain:"d1", time:"0.5h",
+    detail:"Interfaz web: Database Explorer, Query History, worksheets, Data Preview (primeras 100 filas).",
+    mods:[
+      {file:"General/informe_snowflake.md", mod:"Preg 03 — Interfaz web: Snowsight"},
+      {file:"General/informe_snowflake.md", mod:"Preg 19 — Query History"},
+      {file:"General/informe_snowflake.md", mod:"Preg 26 — Rename y Drop en BD"},
+      {file:"General/informe_snowflake.md", mod:"Preg 01 — Vista previa: definición + 100 filas"}
+    ],
+    practice:"Abre Snowsight, navega Database Explorer, revisa Query History, crea un worksheet."},
+  {day:12, title:"Notebooks & Cortex AI", domain:"d1", time:"1.5h",
+    detail:"Notebooks con celdas SQL+Python. COMPLETE() genera texto con LLM. {{myvar}} refiere variables Python en SQL.",
+    mods:[
+      {file:"General/informe_snowflake.md", mod:"Preg 06 — COMPLETE genera texto"},
+      {file:"General/informe_snowflake.md", mod:"Preg 07 — Celda verde = sin errores"},
+      {file:"General/informe_snowflake.md", mod:"Preg 09 — Botón Iniciar activa sesión"},
+      {file:"General/informe_snowflake.md", mod:"Preg 15 — Cortex AI extrae texto"},
+      {file:"General/informe_snowflake.md", mod:"Preg 18 — Notebooks: SQL y Python"},
+      {file:"General/informe_snowflake.md", mod:"Preg 29 — {{myvar}} en SQL"}
+    ],
+    practice:"Crea notebook, celda Python con myvar='test', celda SQL con SELECT '{{myvar}}'. Prueba SELECT COMPLETE('Resume: ...');"},
+  {day:13, title:"Repaso Dominio 1", domain:"review", time:"1.5h",
+    detail:"Flashcards de los 12 temas anteriores. Enfócate en diferencias entre Time Travel y Fail-safe, tipos de tabla, ediciones.",
+    mods:[
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 1.0 (31%) — Repaso completo"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Checklist final — puntos 1-7"}
+    ],
+    practice:"Autoevaluación: cubre los 12 temas sin mirar apuntes. Anota lo que no recuerdes."},
+  {day:14, title:"LAB: Data Warehousing", domain:"lab", time:"2h",
+    detail:"Badge DORA — Insignia 1: Data Warehousing Workshop. Taller oficial hands-on.",
+    mods:[
+      {file:"General/guia_dora_badges.md", mod:"Insignia 1 — Data Warehousing Workshop"},
+      {file:"General/guia_dora_badges.md", mod:"Relación con informe: Preg 02, 10, 12, 13, 16, 17, 30"}
+    ],
+    practice:"Completa el taller DORA y ejecuta el código DORA para obtener la insignia."},
+  {day:15, title:"Stages", domain:"d3", time:"1.5h",
+    detail:"User (@~), Table (@%table), Named (interno), Named externo (S3/GCS/Azure). LIST, REMOVE.",
+    mods:[
+      {file:"General/informe_snowflake.md", mod:"Preg 20 — Datos no estructurados en stages"},
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 6 — Stages (tipos: user, table, named)"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 3.0 — Stages"}
+    ],
+    practice:"LIST @~; CREATE STAGE my_ext_stage URL='s3://bucket/path/'; LIST @my_ext_stage;"},
+  {day:16, title:"COPY INTO (carga)", domain:"d3", time:"1.5h",
+    detail:"Carga datos de stage a tabla. Requiere 3 objetos: stage, tabla y warehouse (para ejecutar).",
+    mods:[
+      {file:"General/informe_snowflake.md", mod:"Preg 02 — COPY INTO table FROM @stage"},
+      {file:"General/informe_snowflake.md", mod:"Preg 12 — COPY INTO carga de fase a tabla"},
+      {file:"General/informe_snowflake.md", mod:"Preg 17 — Objetos: stage, tabla, warehouse"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 3.0 — COPY INTO"}
+    ],
+    practice:"COPY INTO my_table FROM @my_stage FILE_FORMAT=(TYPE=CSV SKIP_HEADER=1);"},
+  {day:17, title:"Formatos de archivo", domain:"d3", time:"1.5h",
+    detail:"Soportados: CSV, JSON, Parquet, Avro, ORC, XML. Semiestructurados nativos: JSON, Avro, ORC, Parquet.",
+    mods:[
+      {file:"General/informe_snowflake.md", mod:"Preg 28 — Formatos semiestructurados: ORC, Avro, JSON"},
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 17 — Tipos de Datos: VARIANT, OBJECT, ARRAY"}
+    ],
+    practice:"CREATE FILE FORMAT json_fmt TYPE=JSON STRIP_OUTER_ARRAY=TRUE; CREATE FILE FORMAT csv_fmt TYPE=CSV;"},
+  {day:18, title:"Semiestructurados (FLATTEN)", domain:"d3", time:"1.5h",
+    detail:"VARIANT guarda semiestructurados. FLATTEN descompone arrays/objetos en filas. Columna VALUE contiene el dato real.",
+    mods:[
+      {file:"General/informe_snowflake.md", mod:"Preg 24 — FLATTEN devuelve columna VALUE"},
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 17 — VARIANT, OBJECT, ARRAY"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 3.0 — Datos semiestructurados"}
+    ],
+    practice:"SELECT * FROM TABLE(FLATTEN(INPUT => PARSE_JSON('{\"a\":1,\"b\":2}')));"},
+  {day:19, title:"No estructurados", domain:"d3", time:"1h",
+    detail:"PDFs, imágenes en stages. PARSE_DOCUMENT extrae texto de PDF, DOCX, PPTX.",
+    mods:[
+      {file:"General/informe_snowflake.md", mod:"Preg 25 — PARSE_DOCUMENT extrae texto de PDF"},
+      {file:"General/informe_snowflake.md", mod:"Preg 20 — Etapa para no estructurados"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 3.0 — Datos no estructurados"}
+    ],
+    practice:"SELECT PARSE_DOCUMENT('@stage/reporte.pdf', 'PDF')::STRING AS contenido;"},
+  {day:20, title:"Snowpipe", domain:"d3", time:"1.5h",
+    detail:"Carga automatizada continua. CREATE PIPE, ALTER PIPE REFRESH. Notificaciones SQS/SNS para eventos.",
+    mods:[
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 3.0 — Snowpipe (carga automatizada)"},
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 14 — External Tables"}
+    ],
+    practice:"CREATE PIPE my_pipe AS COPY INTO t FROM @stage; ALTER PIPE my_pipe REFRESH;"},
+  {day:21, title:"Descarga (COPY INTO loc.)", domain:"d3", time:"1h",
+    detail:"COPY INTO @stage FROM table descarga datos. Se puede especificar partición y formato.",
+    mods:[
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 3.0 — Descarga de datos"},
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 6 — Stages (descarga)"}
+    ],
+    practice:"COPY INTO @my_stage/data/ FROM my_table FILE_FORMAT=(TYPE=PARQUET);"},
+  {day:22, title:"Data Sharing & Reader Accts", domain:"d5", time:"1.5h",
+    detail:"Secure Data Sharing sin copiar datos. CREATE SHARE + GRANT SELECT. Reader Accounts para cuentas no-Snowflake (solo lectura).",
+    mods:[
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 20 — Data Sharing completo"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 5.0 — Secure Data Sharing y Reader Accounts"}
+    ],
+    practice:"CREATE SHARE my_share; GRANT USAGE ON DATABASE db TO SHARE my_share; GRANT SELECT ON TABLE db.schema.t TO SHARE my_share;"},
+  {day:23, title:"Marketplace & Data Exchange", domain:"d5", time:"1h",
+    detail:"Sin diferencia de rendimiento (mismo mecanismo Secure Data Sharing). Marketplace (público), Data Exchange (privado/organización).",
+    mods:[
+      {file:"General/informe_snowflake.md", mod:"Preg 08 — Sin diferencia de rendimiento"},
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 20 — Data Exchange, Marketplace, Reader Accounts"}
+    ],
+    practice:"Explora Snowflake Marketplace. Revisa listings públicos y privados."},
+  {day:24, title:"Auto-fulfillment", domain:"d5", time:"0.5h",
+    detail:"Disponibilidad alternativa si el provider no está en misma región. Transparencia para el consumidor.",
+    mods:[
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 20 — Auto-fulfillment"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 5.0 — Auto-fulfillment"}
+    ],
+    practice:"Lee la documentación oficial sobre auto-fulfillment en Data Sharing."},
+  {day:25, title:"LAB: Data Lake + Collab", domain:"lab", time:"3h",
+    detail:"Badges DORA: Insignia 4 (Data Lake Workshop) + Insignia 2 (Collaboration, Marketplace & Cost).",
+    mods:[
+      {file:"General/guia_dora_badges.md", mod:"Insignias 2 y 4 — Data Lake Workshop y Collaboration Workshop"},
+      {file:"General/guia_dora_badges.md", mod:"Relación: Preg 08, 20, 24, 25, 28"}
+    ],
+    practice:"Completa ambos laboratorios DORA y obtén ambas insignias."},
+  {day:26, title:"SQL Avanzado (JOINs, CTEs)", domain:"d4", time:"1.5h",
+    detail:"JOINs, CTEs (WITH), subconsultas. LIMIT sin ORDER BY = resultado no determinista. SELECT * = todas las columnas.",
+    mods:[
+      {file:"General/informe_snowflake.md", mod:"Preg 13 — LIMIT 10 sin ORDER BY: no determinista"},
+      {file:"General/informe_snowflake.md", mod:"Preg 30 — SELECT *: todas las columnas"}
+    ],
+    practice:"WITH cte AS (SELECT * FROM t1) SELECT cte.*, t2.val FROM cte JOIN t2 ON cte.id = t2.id;"},
+  {day:27, title:"Funciones de ventana", domain:"d4", time:"1.5h",
+    detail:"ROW_NUMBER(), RANK(), DENSE_RANK(), LAG(), LEAD(), SUM() OVER(PARTITION BY ... ORDER BY ...).",
+    mods:[
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 18 — Ventanas y Funciones Analíticas"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 4.0 — Funciones de ventana"}
+    ],
+    practice:"SELECT dept, salary, ROW_NUMBER() OVER(PARTITION BY dept ORDER BY salary DESC) AS r FROM emp;"},
+  {day:28, title:"Dynamic Tables", domain:"d4", time:"1.5h",
+    detail:"Refresco automático con TARGET_LAG. Alternativa a Tasks+Streams. Almacenan datos físicamente.",
+    mods:[
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 9 — Dynamic Tables vs Materialized Views vs Views"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 4.0 — Dynamic Tables"}
+    ],
+    practice:"CREATE DYNAMIC TABLE dt TARGET_LAG='5 minutes' WAREHOUSE=my_wh AS SELECT id, COUNT(*) FROM source GROUP BY id;"},
+  {day:29, title:"Materialized Views", domain:"d4", time:"1h",
+    detail:"Almacenan resultados en disco. Auto-refresh con costo. vs Views (no almacenan) vs Dynamic Tables (refresh más flexible).",
+    mods:[
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 9 — Materialized Views (tabla comparativa)"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 4.0 — Materialized Views"}
+    ],
+    practice:"CREATE MATERIALIZED VIEW mv AS SELECT category, COUNT(*) FROM products GROUP BY category;"},
+  {day:30, title:"Tasks & Streams (CDC)", domain:"d4", time:"2h",
+    detail:"Tasks: programadas (SCHEDULE) o encadenadas (AFTER). Streams: CDC captura INSERT/UPDATE/DELETE. Offset avanza al consumir.",
+    mods:[
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 10 — Tareas (Tasks) y Streams (CDC)"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 4.0 — Tasks y Streams"}
+    ],
+    practice:"CREATE STREAM s ON TABLE t; CREATE TASK tk WAREHOUSE=w SCHEDULE='5 minute' AS INSERT INTO log SELECT * FROM s;"},
+  {day:31, title:"EXPLAIN & Query Profile", domain:"d4", time:"1.5h",
+    detail:"EXPLAIN muestra plan textual. Query Profile en Snowsight identifica cuellos de botella, tablescans, joins costosos.",
+    mods:[
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 19 — Optimización de Consultas (EXPLAIN, Query Profile)"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 4.0 — EXPLAIN y Query Profile"}
+    ],
+    practice:"EXPLAIN SELECT * FROM t1 JOIN t2 ON t1.id=t2.id; Revisa el plan. Abre Query Profile en Snowsight."},
+  {day:32, title:"Search Optimization", domain:"d4", time:"0.5h",
+    detail:"Search Optimization Service mejora búsquedas por punto y subcadenas en tablas grandes. Costo adicional de almacenamiento.",
+    mods:[
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 19 — Search Optimization Service"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 4.0 — Search Optimization"}
+    ],
+    practice:"ALTER TABLE t ADD SEARCH OPTIMIZATION ON (col);"},
+  {day:33, title:"Repaso Dominio 4", domain:"review", time:"1.5h",
+    detail:"Repaso: funciones ventana, dynamic tables, streams+ tasks, EXPLAIN, search optimization.",
+    mods:[
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 4.0 (21%) — Repaso completo"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Checklist final — puntos 13-14"}
+    ],
+    practice:"Autoevaluación de los 7 temas del dominio 4 sin mirar apuntes."},
+  {day:34, title:"LAB: Data Engineering", domain:"lab", time:"2h",
+    detail:"Badge DORA — Insignia 5: Data Engineering Workshop. Dynamic tables, streams, tasks, clustering.",
+    mods:[
+      {file:"General/guia_dora_badges.md", mod:"Insignia 5 — Data Engineering Workshop"},
+      {file:"General/guia_dora_badges.md", mod:"Relación con plan: Módulos 9, 10, 19"}
+    ],
+    practice:"Completa el laboratorio DORA de Data Engineering."},
+  {day:35, title:"Roles del sistema", domain:"d2", time:"1h",
+    detail:"ORGADMIN, ACCOUNTADMIN, SECURITYADMIN, USERADMIN, SYSADMIN, PUBLIC. Herencia.",
+    mods:[
+      {file:"General/informe_snowflake.md", mod:"Preg 23 — USERADMIN es rol definido por sistema"},
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 11 — Roles y RBAC (tabla completa)"}
+    ],
+    practice:"SHOW ROLES; Dibuja el árbol de herencia de roles."},
+  {day:36, title:"RBAC (privilegios)", domain:"d2", time:"1.5h",
+    detail:"GRANT privilege ON object TO ROLE. OWNERSHIP (solo un rol). Roles secundarios: SET SECONDARY ROLES ALL.",
+    mods:[
+      {file:"General/informe_snowflake.md", mod:"Preg 21 — Otorgar privilegios al rol (forma recomendada)"},
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 11 — RBAC completo"},
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 16 — Seguridad a nivel de objeto"}
+    ],
+    practice:"CREATE ROLE analyst; GRANT USAGE ON DATABASE db TO ROLE analyst; GRANT SELECT ON ALL TABLES IN SCHEMA db.sch TO ROLE analyst;"},
+  {day:37, title:"Masking Policies", domain:"d2", time:"1.5h",
+    detail:"Enmascara columnas según el rol. CREATE MASKING POLICY + ALTER TABLE ... SET MASKING POLICY.",
+    mods:[
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 12 — Masking Policy (ejemplo SQL)"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 2.0 — Políticas de enmascaramiento"}
+    ],
+    practice:"CREATE MASKING POLICY email_mask AS (val STRING) RETURNS STRING -> CASE WHEN CURRENT_ROLE()='ADMIN' THEN val ELSE '***' END;"},
+  {day:38, title:"Row Access Policies", domain:"d2", time:"1h",
+    detail:"Filtra filas completas según el rol. CREATE ROW ACCESS POLICY + ALTER TABLE ... ADD ROW ACCESS POLICY.",
+    mods:[
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 12 — Row Access Policy"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 2.0 — Políticas de acceso a filas"}
+    ],
+    practice:"CREATE ROW ACCESS POLICY region_filter AS (region STRING) RETURNS BOOLEAN -> CURRENT_ROLE() IN ('ADMIN','GLOBAL') OR region = 'PUBLIC';"},
+  {day:39, title:"Network Policies", domain:"d2", time:"0.5h",
+    detail:"Restringe IPs que pueden conectarse a la cuenta. CREATE NETWORK POLICY + ALTER ACCOUNT SET.",
+    mods:[
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 12 — Network Policy"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 2.0 — Políticas de red"}
+    ],
+    practice:"CREATE NETWORK POLICY office_only ALLOWED_IP_LIST=('192.168.1.0/24','10.0.0.0/8') BLOCKED_IP_LIST=('0.0.0.0/0');"},
+  {day:40, title:"Resource Monitors", domain:"d2", time:"1.5h",
+    detail:"Credit quota. Frecuencia: MONTHLY, DAILY, WEEKLY, YEARLY, NEVER. Acciones: NOTIFY, SUSPEND, SUSPEND_IMMEDIATE.",
+    mods:[
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 7 — Resource Monitors"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 2.0 — Resource Monitors"}
+    ],
+    practice:"CREATE RESOURCE MONITOR rm WITH CREDIT_QUOTA=100 FREQUENCY=MONTHLY START_TIMESTAMP='2026-07-01' TRIGGERS ON 80% DO NOTIFY ON 100% DO SUSPEND ON 110% DO SUSPEND_IMMEDIATE;"},
+  {day:41, title:"Conectividad", domain:"d2", time:"1h",
+    detail:"MFA, SSO (SAML), OAuth, Key Pair Auth (RSA), Private Link (AWS/Azure/GCP sin internet).",
+    mods:[
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulo 15 — Conectividad y Seguridad"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 2.0 — Conectividad"}
+    ],
+    practice:"Genera par de llaves RSA con openssl. ALTER USER meu SET RSA_PUBLIC_KEY='...';"},
+  {day:42, title:"SIMULACRO #1", domain:"exam", time:"2h",
+    detail:"100 preguntas. 115 minutos. Simulación exacta del examen. Sin apuntes. Cronometrado.",
+    mods:[
+      {file:"General/guia_completa_COF-C03.md", mod:"Checklist final — 18 puntos pre-examen"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Distribución: D1=31%, D2=20%, D3=18%, D4=21%, D5=10%"}
+    ],
+    practice:"Sin apuntes. 115 min. Revisa resultados al final y clasifica errores por dominio."},
+  {day:43, title:"Revisar errores", domain:"review", time:"1.5h",
+    detail:"Identifica dominios débiles del simulacro #1. Refuerza solo los temas donde fallaste.",
+    mods:[
+      {file:"General/guia_completa_COF-C03.md", mod:"Análisis de cobertura: D2 (20%) y D4 (21%) son los más críticos"},
+      {file:"General/plan_estudio_snowpro_core.md", mod:"Módulos según errores detectados"}
+    ],
+    practice:"Clasifica cada error por dominio. Prioriza estudio en dominios con <70% acierto."},
+  {day:44, title:"Refuerzo D2 + D4", domain:"review", time:"1.5h",
+    detail:"Según resultados del simulacro. Enfocado en governance (roles, masking, resource monitors) y optimización.",
+    mods:[
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 2.0 — Gestión de cuentas y gobernanza"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Dominio 4.0 — Optimización y transformación"}
+    ],
+    practice:"Repasa los módulos específicos donde hayas fallado en el simulacro."},
+  {day:45, title:"SIMULACRO #2", domain:"exam", time:"2h",
+    detail:"Segundo simulacro. Mismas condiciones. Meta: 800+ puntos.",
+    mods:[
+      {file:"General/guia_completa_COF-C03.md", mod:"Checklist final pre-examen — repasar antes"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Plan de estudio cronológico — Semana 4"}
+    ],
+    practice:"Sin apuntes. 115 min. Meta 800/1000 puntos."},
+  {day:46, title:"REPASO FINAL", domain:"exam", time:"1.5h",
+    detail:"Repaso rápido de los 3 archivos principales + checklist. Conceptos clave de última hora.",
+    mods:[
+      {file:"General/informe_snowflake.md", mod:"30 preguntas — leer completo (repaso rápido)"},
+      {file:"General/plan_estudio_snowpro_core.md", mod:"21 módulos — leer títulos y ejemplos"},
+      {file:"General/guia_completa_COF-C03.md", mod:"Checklist final + dominios + distribución"}
+    ],
+    practice:"Repasa la checklist pre-examen. Confirma que dominas cada punto."},
+];
+
+const startDate = new Date(2026, 6, 1);
+const totalDays = 46;
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+function daysSinceStart(date) {
+  const diff = date - startDate;
+  return Math.floor(diff / (1000 * 60 * 60 * 24)) + 1;
+}
+
+function pad(n) { return String(n).padStart(2,'0'); }
+function formatDate(d) { return pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear(); }
+
+function getMonday(date) {
+  const d = new Date(date);
+  const day = d.getDay();
+  d.setDate(d.getDate() - day + (day === 0 ? -6 : 1));
+  return d;
+}
+
+let currentMonday = getMonday(new Date());
+
+function renderCalendar() {
+  const container = document.getElementById('calendar');
+  const weekLabel = document.getElementById('weekLabel');
+  const weekIndicator = document.getElementById('weekIndicator');
+
+  const mon = new Date(currentMonday);
+  const sun = new Date(mon); sun.setDate(sun.getDate()+6);
+  weekLabel.textContent = formatDate(mon)+' — '+formatDate(sun);
+
+  const firstMon = getMonday(startDate);
+  const wk = Math.round((mon-firstMon)/(7*86400000))+1;
+  weekIndicator.innerHTML = (wk>=1&&wk<=7) ? '<strong>Semana '+wk+'</strong> de 7' : '&nbsp;';
+
+  const dnames = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+  let html = '<div class="week-grid">';
+  dnames.forEach(n => html += '<div class="day-header">'+n+'</div>');
+
+  for (let i=0;i<7;i++) {
+    const date = new Date(mon); date.setDate(date.getDate()+i);
+    const dayNum = date.getDate();
+    const ds = daysSinceStart(date);
+    const isStudy = ds>=1 && ds<=totalDays;
+    const isFuture = ds>totalDays;
+    const isBefore = ds<1;
+    const isWeekend = i>=5;
+    const isToday = date.getTime()===today.getTime();
+
+    let cc = 'day-cell', dc = 'day-num';
+    if (isFuture) cc += ' empty';
+    else {
+      if (isWeekend) dc += ' weekend';
+      if (isToday) dc += ' today-indicator';
+      if (isBefore) dc += ' faded';
+    }
+
+    let evHtml = '';
+    if (isStudy && !isFuture) {
+      const ev = events.find(e => e.day===ds);
+      if (ev) {
+        evHtml = '<div class="event domain-'+ev.domain+'" onclick="showEvent('+ds+')">'+
+          '<strong>'+ev.title+'</strong>'+
+          '<div class="meta"><span class="time">⏱ '+ev.time+'</span></div>'+
+        '</div>';
+      }
+    }
+
+    let ml = '';
+    if (date.getDate()===1 || (i===0 && !isFuture)) {
+      const ms = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+      ml = '<span class="month-label">'+ms[date.getMonth()]+'</span>';
+    }
+
+    html += '<div class="'+cc+'" onclick="clickDay('+ds+')">'+
+      '<div class="'+dc+'">'+dayNum+'</div>'+ml+evHtml+'</div>';
+  }
+
+  html += '</div>';
+  container.innerHTML = html;
+  updateProgress();
+}
+
+function clickDay(ds) {
+  if (ds>=1 && ds<=46) showEvent(ds);
+}
+
+function showEvent(day) {
+  const ev = events.find(e => e.day===day);
+  if (!ev) return;
+
+  document.getElementById('panelEmpty').style.display='none';
+  const pc = document.getElementById('panelContent');
+  pc.style.display='block';
+
+  document.getElementById('panelTitle').textContent = 'Día '+day+': '+ev.title;
+
+  const domainNames = {d1:'Dominio 1 — Arquitectura (31%)',d2:'Dominio 2 — Gobernanza (20%)',
+    d3:'Dominio 3 — Carga/Descarga (18%)',d4:'Dominio 4 — Optimización (21%)',
+    d5:'Dominio 5 — Colaboración (10%)',lab:'Laboratorio DORA',exam:'Simulacro',review:'Repaso'};
+  document.getElementById('panelDomain').textContent = domainNames[ev.domain] || '';
+
+  document.getElementById('panelTime').textContent = '⏱ Tiempo recomendado: '+ev.time;
+
+  document.getElementById('panelDetail').textContent = ev.detail;
+
+  const refsList = document.getElementById('panelRefs');
+  refsList.innerHTML = '';
+  if (ev.mods && ev.mods.length>0) {
+    ev.mods.forEach(r => {
+      const li = document.createElement('li');
+      li.innerHTML = '<strong>'+r.mod+'</strong><a class="file" href="'+r.file+'">📄 '+r.file+'</a>';
+      refsList.appendChild(li);
+    });
+  } else {
+    refsList.innerHTML = '<li style="opacity:0.5;font-size:0.72rem;">Sin referencias adicionales</li>';
+  }
+
+  const practiceList = document.getElementById('panelPractice');
+  practiceList.innerHTML = '';
+  if (ev.practice) {
+    const li = document.createElement('li');
+    li.textContent = ev.practice;
+    practiceList.appendChild(li);
+  }
+}
+
+function closePanel() {
+  document.getElementById('panelEmpty').style.display='flex';
+  document.getElementById('panelContent').style.display='none';
+}
+
+function updateProgress() {
+  const ds = daysSinceStart(today);
+  const completed = Math.min(Math.max(ds-1,0),totalDays);
+  const pct = Math.round((completed/totalDays)*100);
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressLabel').textContent = pct+'% completado';
+  document.getElementById('progressDays').textContent = completed+' / '+totalDays+' días';
+  document.getElementById('statProgress').textContent = pct+'%';
+  document.getElementById('statProgressLabel').textContent = completed+'/'+totalDays+' días';
+}
+
+function changeWeek(dir) { currentMonday.setDate(currentMonday.getDate()+dir*7); renderCalendar(); }
+function goCurrentWeek() { currentMonday=getMonday(new Date()); renderCalendar(); }
+
+renderCalendar();
+</script>
+</body>
+</html>

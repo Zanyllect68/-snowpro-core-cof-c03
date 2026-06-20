@@ -1,0 +1,9 @@
+title: SnowPro Core COF-C03 — Recursos de Estudio
+description: Repositorio completo de estudio para la certificación SnowPro Core COF-C03. Apuntes, guías DORA, calendario interactivo, plan de estudio y preguntas tipo examen.
+theme: null
+markdown: GFM
+include:
+  - index.html
+  - README.md
+exclude:
+  - .gitignore
