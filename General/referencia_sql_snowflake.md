@@ -244,15 +244,42 @@ SELECT * FROM eventos LIMIT 5;  -- Puede devolver filas diferentes cada vez
 ### 1.9 Datos semiestructurados (VARIANT)
 
 ```sql
-SELECT columna:campo::STRING AS valor FROM tabla_json;
-SELECT columna:objeto.campo::INT AS numero FROM tabla_json;
-SELECT columna[0]::STRING AS primer_elemento FROM tabla_array;
+-- Crear tabla con columna VARIANT
+CREATE TABLE clientes_json (
+    id INT,
+    customer_info VARIANT
+);
 
+-- Insertar JSON directamente
+INSERT INTO clientes_json
+SELECT 1, PARSE_JSON('{"cust_id":1,"name":"Juan","age":30,"email":"juan@mail.com","address":{"street":"Av Siempre Viva","city":"Springfield","state":"IL"}}');
+
+-- OBJECT_CONSTRUCT: crear objeto JSON desde pares clave-valor
+SELECT OBJECT_CONSTRUCT('name', 'Ana', 'age', 28, 'email', 'ana@mail.com') AS info;
+
+-- Consultar: notación de dos puntos (:) para acceder a claves
+SELECT customer_info:name::STRING AS nombre,
+       customer_info:age::INT AS edad,
+       customer_info:email::STRING AS email
+FROM clientes_json;
+
+-- Consultar JSON anidado: dos puntos + punto
+SELECT customer_info:address.city::STRING AS ciudad,
+       customer_info:address.state::STRING AS estado
+FROM clientes_json;
+
+-- Notación alternativa: solo dos puntos por nivel
+SELECT customer_info:address:city::STRING AS ciudad,
+       customer_info:address:state::STRING AS estado
+FROM clientes_json;
+
+-- Acceder a arrays por índice
+SELECT customer_info:tags[0]::STRING AS primer_tag FROM clientes_json;
+
+-- FLATTEN: desanidar arrays/objetos en filas
 SELECT * FROM TABLE(FLATTEN(INPUT => PARSE_JSON('{"a":1,"b":2}')));
-/*
-  Value columns: SEQ, KEY, PATH, INDEX, VALUE, THIS
-  VALUE contiene el dato real desanidado
-*/
+-- Columnas: SEQ, KEY, PATH, INDEX, VALUE, THIS
+-- VALUE contiene el dato real desanidado
 ```
 
 ### 1.10 Funciones de ventana

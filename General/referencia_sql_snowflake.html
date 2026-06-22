@@ -434,13 +434,34 @@ SELECT * FROM eventos LIMIT 5;</code></pre>
     <h3 id="s1-10">1.10 Datos semiestructurados (VARIANT)</h3>
     <div class="code-block">
       <button class="copy-btn" onclick="copySql(this)">Copiar</button>
-      <pre><code class="language-sql">SELECT columna:campo::STRING AS valor FROM tabla_json;
-SELECT columna:objeto.campo::INT AS numero FROM tabla_json;
-SELECT columna[0]::STRING AS primer_elemento FROM tabla_array;
+      <pre><code class="language-sql">CREATE TABLE clientes_json (
+    id INT, customer_info VARIANT
+);
 
+INSERT INTO clientes_json
+SELECT 1, PARSE_JSON('{"cust_id":1,"name":"Juan","age":30,
+  "email":"juan@mail.com","address":{"street":"Av Siempre Viva",
+  "city":"Springfield","state":"IL"}}');
+
+SELECT OBJECT_CONSTRUCT('name','Ana','age',28,'email','ana@mail.com') AS info;
+
+-- Notaci&oacute;n de dos puntos (:) para acceder a claves
+SELECT customer_info:name::STRING AS nombre,
+       customer_info:age::INT AS edad,
+       customer_info:email::STRING AS email
+FROM clientes_json;
+
+-- JSON anidado: dos puntos + punto
+SELECT customer_info:address.city::STRING AS ciudad,
+       customer_info:address.state::STRING AS estado
+FROM clientes_json;
+
+-- Arrays por &iacute;ndice
+SELECT customer_info:tags[0]::STRING AS primer_tag FROM clientes_json;
+
+-- FLATTEN: desanidar en filas
 SELECT * FROM TABLE(FLATTEN(INPUT => PARSE_JSON('{"a":1,"b":2}')));
--- Columnas: SEQ, KEY, PATH, INDEX, VALUE, THIS
--- VALUE contiene el dato real desanidado</code></pre>
+-- Columnas: SEQ, KEY, PATH, INDEX, VALUE, THIS</code></pre>
     </div>
 
     <h3 id="s1-11">1.11 Funciones de ventana</h3>
