@@ -363,10 +363,12 @@ CREATE OR REPLACE TABLE products (
 );
 
 CREATE OR REPLACE TABLE orders (
-    invoiceno VARCHAR(10),
+    invoiceno VARCHAR(10) PRIMARY KEY,
     invoicedate TIMESTAMP_NTZ(9),
+    customerid NUMBER(38,0),
     unitprice NUMBER(10,2),
-    quantity NUMBER(38,0)
+    quantity NUMBER(38,0),
+    FOREIGN KEY (customerid) REFERENCES customers(customerid)
 );
 
 CREATE OR REPLACE TABLE customers (
