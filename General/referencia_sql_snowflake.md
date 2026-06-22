@@ -357,6 +357,18 @@ CREATE TABLE clientes (
 
 CREATE OR REPLACE TABLE clientes AS SELECT * FROM clientes_temp;
 
+CREATE OR REPLACE TABLE products (
+    stockcode VARCHAR(255),
+    description VARCHAR(255)
+);
+
+CREATE OR REPLACE TABLE orders (
+    invoiceno VARCHAR,
+    invoicedate TIMESTAMP,
+    unitprice NUMBER(10,2),
+    quantity NUMBER(38,0)
+);
+
 -- Tipos de tabla
 CREATE PERMANENT TABLE p (id INT);     -- Durable, 1-90d Time Travel
 CREATE TRANSIENT TABLE t (id INT);     -- Durable, max 1d Time Travel
