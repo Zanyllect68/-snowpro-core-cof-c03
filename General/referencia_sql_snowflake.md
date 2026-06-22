@@ -849,6 +849,7 @@ SHOW ROLES;
 SHOW GRANTS TO ROLE analyst;
 SHOW FUTURE GRANTS TO ROLE analyst;
 DESCRIBE TABLE clientes;
+DESC TABLE ecommerceonlineretail;
 ```
 
 ### 12.5 Optimización de consultas
