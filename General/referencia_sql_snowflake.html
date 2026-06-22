@@ -200,6 +200,7 @@ table code { font-size: 0.7rem; padding: 1px 5px; background: rgba(255,255,255,0
     <a class="sub" href="#s10-7">Cifrado</a>
     <a class="section" href="#s11">11. Colaboraci&oacute;n</a>
     <a class="section" href="#s12">12. Monitoreo</a>
+    <a class="sub" href="#s12-5">Optimizaci&oacute;n consultas</a>
     <a class="section" href="#s13">13. Cortex AI</a>
     <a class="section" href="#s14">14. Funciones sistema</a>
     <a class="section" href="#s15">15. Convenciones</a>
@@ -896,6 +897,49 @@ SHOW TABLES; SHOW SCHEMAS; SHOW WAREHOUSES; SHOW ROLES;
 SHOW GRANTS TO ROLE analyst;
 SHOW FUTURE GRANTS TO ROLE analyst;
 DESCRIBE TABLE clientes;</code></pre>
+    </div>
+
+    <h3 id="s12-5">12.5 Optimizaci&oacute;n de consultas</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">-- EVITAR: Producto cartesiano (falta condici&oacute;n ON)
+SELECT * FROM orders JOIN order_details;
+
+-- CORRECTO: Siempre especificar ON
+SELECT * FROM orders o JOIN order_details od ON o.order_id = od.order_id;
+
+-- EVITAR: UNION (elimina duplicados, m&aacute;s lento)
+SELECT name FROM pizzas UNION SELECT name FROM pizza_type;
+
+-- RECOMENDADO: UNION ALL (m&aacute;s r&aacute;pido, sin dedup)
+SELECT name FROM pizzas UNION ALL SELECT name FROM pizza_type;
+
+-- EVITAR: SELECT * (m&aacute;s columnas = m&aacute;s recursos)
+SELECT * FROM orders WHERE order_date = '2026-07-01';
+
+-- RECOMENDADO: Solo columnas necesarias
+SELECT order_id, order_date, status FROM orders WHERE order_date = '2026-07-01';
+
+-- EVITAR: Filtrar despu&eacute;s de JOIN
+SELECT o.order_id, o.order_date, od.pizza_id, od.quantity
+FROM orders o JOIN order_details od ON o.order_id = od.order_id
+WHERE o.order_date = '2026-07-01';
+
+-- RECOMENDADO: Filtrar primero en CTE
+WITH filtradas AS (
+    SELECT order_id FROM orders WHERE order_date = '2026-07-01'
+)
+SELECT o.order_id, od.pizza_id, od.quantity
+FROM filtradas o JOIN order_details od ON o.order_id = od.order_id;
+
+-- LIMIT reduce tiempo y costo
+SELECT * FROM orders ORDER BY order_id LIMIT 10;
+
+-- Query History: consultas lentas
+SELECT query_id, query_text, execution_time, start_time
+FROM SNOWFLAKE.ACCOUNT_USAGE.QUERY_HISTORY
+WHERE query_text ILIKE '%order_details%'
+ORDER BY execution_time DESC LIMIT 10;</code></pre>
     </div>
   </div>
 

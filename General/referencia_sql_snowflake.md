@@ -201,6 +201,25 @@ SELECT pt.name, c1.avg_price, c2.total
 FROM pizza_type pt
 JOIN cte1 c1 ON pt.pizza_type_id = c1.pizza_type_id
 JOIN cte2 c2 ON pt.pizza_type_id = c2.pizza_type_id;
+
+-- CTEs con UNION ALL
+WITH most_ordered AS (
+    SELECT pizza_id, SUM(quantity) AS total_qty
+    FROM order_details
+    GROUP BY pizza_id
+    ORDER BY total_qty DESC
+    LIMIT 5
+), cheapest_pizza AS (
+    SELECT pizza_id, price
+    FROM pizzas
+    WHERE price = (SELECT MIN(price) FROM pizzas)
+    LIMIT 1
+)
+SELECT pizza_id, 'Most Ordered' AS Description, total_qty AS metric
+FROM most_ordered
+UNION ALL
+SELECT pizza_id, 'Cheapest' AS Description, price AS metric
+FROM cheapest_pizza;
 ```
 
 ### 1.7 SELECT *
@@ -782,6 +801,55 @@ SHOW ROLES;
 SHOW GRANTS TO ROLE analyst;
 SHOW FUTURE GRANTS TO ROLE analyst;
 DESCRIBE TABLE clientes;
+```
+
+### 12.5 Optimización de consultas
+
+```sql
+-- EVITAR: Producto cartesiano (falta condición ON)
+SELECT * FROM orders JOIN order_details;  -- Cada order × cada detail
+
+-- CORRECTO: Siempre especificar ON
+SELECT * FROM orders o JOIN order_details od ON o.order_id = od.order_id;
+
+-- EVITAR: UNION (elimina duplicados, más lento)
+SELECT name FROM pizzas UNION SELECT name FROM pizza_type;
+
+-- RECOMENDADO: UNION ALL (más rápido, sin dedup)
+SELECT name FROM pizzas UNION ALL SELECT name FROM pizza_type;
+
+-- EVITAR: SELECT * (más columnas = más recursos)
+SELECT * FROM orders WHERE order_date = '2026-07-01';
+
+-- RECOMENDADO: Solo columnas necesarias
+SELECT order_id, order_date, status
+FROM orders WHERE order_date = '2026-07-01';
+
+-- EVITAR: Filtrar después de JOIN (más filas procesadas)
+SELECT o.order_id, o.order_date, od.pizza_id, od.quantity
+FROM orders o
+JOIN order_details od ON o.order_id = od.order_id
+WHERE o.order_date = '2026-07-01';
+
+-- RECOMENDADO: Filtrar primero en CTE (menos filas en JOIN)
+WITH orders_filtradas AS (
+    SELECT order_id, order_date
+    FROM orders
+    WHERE order_date = '2026-07-01'
+)
+SELECT o.order_id, o.order_date, od.pizza_id, od.quantity
+FROM orders_filtradas o
+JOIN order_details od ON o.order_id = od.order_id;
+
+-- LIMIT reduce tiempo y costo en exploración
+SELECT * FROM orders ORDER BY order_id LIMIT 10;
+
+-- Query History: identificar consultas lentas
+SELECT query_id, query_text, execution_time, start_time
+FROM SNOWFLAKE.ACCOUNT_USAGE.QUERY_HISTORY
+WHERE query_text ILIKE '%order_details%'
+ORDER BY execution_time DESC
+LIMIT 10;
 ```
 
 ---
