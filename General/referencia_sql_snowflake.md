@@ -142,18 +142,49 @@ LATERAL (SELECT SUM(p.price * od.quantity) AS total_cost
          WHERE od.order_id = o.order_id) t;
 ```
 
-### 1.6 CTEs (WITH)
+### 1.6 Subconsultas
 
 ```sql
-WITH ventas_altas AS (
-    SELECT cliente_id, SUM(monto) AS total
-    FROM pagos
-    GROUP BY cliente_id
-    HAVING total > 1000
+-- Subconsulta no correlacionada (independiente)
+SELECT pizza_id, pizza_type_id, price
+FROM pizzas
+WHERE price = (SELECT MAX(price) FROM pizzas);
+
+-- Subconsulta correlacionada (referencia columna externa)
+SELECT pizza_id, pizza_type_id, price
+FROM pizzas p
+WHERE price = (
+    SELECT MAX(price) FROM pizzas
+    WHERE pizza_type_id = p.pizza_type_id
+);
+```
+
+### 1.7 CTEs (WITH)
+
+```sql
+WITH max_price AS (
+    SELECT pizza_type_id, MAX(price) AS max_p
+    FROM pizzas
+    GROUP BY pizza_type_id
 )
-SELECT c.nombre, v.total
-FROM clientes c
-JOIN ventas_altas v ON c.id = v.cliente_id;
+SELECT pt.name, p.pizza_id, p.price, mp.max_p
+FROM pizzas p
+JOIN pizza_type pt ON p.pizza_type_id = pt.pizza_type_id
+JOIN max_price mp ON p.pizza_type_id = mp.pizza_type_id
+WHERE p.price < mp.max_p;
+
+-- Múltiples CTE
+WITH cte1 AS (
+    SELECT pizza_type_id, AVG(price) AS avg_price
+    FROM pizzas GROUP BY pizza_type_id
+), cte2 AS (
+    SELECT pizza_type_id, COUNT(*) AS total
+    FROM pizzas GROUP BY pizza_type_id
+)
+SELECT pt.name, c1.avg_price, c2.total
+FROM pizza_type pt
+JOIN cte1 c1 ON pt.pizza_type_id = c1.pizza_type_id
+JOIN cte2 c2 ON pt.pizza_type_id = c2.pizza_type_id;
 ```
 
 ### 1.7 SELECT *
