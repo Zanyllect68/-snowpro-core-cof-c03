@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Referencia SQL Snowflake — COF-C03</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+:root {
+  --bg: #0f1117; --card: #1a1d2e; --border: #262a3a;
+  --text: #e2e8f0; --muted: #8892a6; --accent: #60a5fa;
+  --green: #22c55e; --orange: #f97316; --purple: #a78bfa;
+  --radius: 10px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg); color: var(--text);
+  display: flex; min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  width: 260px; flex-shrink: 0;
+  background: var(--card);
+  border-right: 1px solid var(--border);
+  padding: 20px 0; height: 100vh; position: sticky; top: 0;
+  overflow-y: auto; display: flex; flex-direction: column;
+}
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.sidebar .logo {
+  padding: 0 16px 16px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+.sidebar .logo h1 {
+  font-size: 0.85rem; font-weight: 700;
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.sidebar .logo span { font-size: 0.62rem; color: var(--muted); display: block; margin-top: 2px; }
+.sidebar nav { flex: 1; padding: 0 8px; }
+.sidebar nav a {
+  display: block; padding: 6px 10px; border-radius: 6px;
+  font-size: 0.72rem; color: var(--muted); text-decoration: none;
+  transition: all 0.15s; cursor: pointer;
+}
+.sidebar nav a:hover { background: rgba(255,255,255,0.05); color: var(--text); }
+.sidebar nav a.section {
+  font-weight: 600; color: var(--text); font-size: 0.75rem;
+  margin-top: 4px;
+}
+.sidebar nav a.sub { padding-left: 20px; font-size: 0.68rem; }
+.sidebar .back-link {
+  padding: 12px 16px 0; border-top: 1px solid var(--border);
+  margin-top: 8px;
+}
+.sidebar .back-link a {
+  color: var(--accent); font-size: 0.7rem; text-decoration: none;
+  display: flex; align-items: center; gap: 4px;
+}
+.sidebar .back-link a:hover { text-decoration: underline; }
+
+/* ===== MAIN ===== */
+.main {
+  flex: 1; padding: 40px 48px; max-width: 1000px; min-width: 0;
+}
+.main h1 {
+  font-size: 1.6rem; font-weight: 700; margin-bottom: 6px;
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.main .subtitle { color: var(--muted); font-size: 0.82rem; margin-bottom: 32px; }
+
+.category {
+  margin-bottom: 36px; scroll-margin-top: 16px;
+}
+.category h2 {
+  font-size: 1.1rem; font-weight: 700; margin-bottom: 14px;
+  padding-bottom: 8px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 8px;
+}
+.category h2 .badge {
+  font-size: 0.6rem; font-weight: 600; padding: 2px 8px;
+  border-radius: 100px; background: rgba(96,165,250,0.12);
+  color: var(--accent); border: 1px solid rgba(96,165,250,0.2);
+}
+.category h3 {
+  font-size: 0.88rem; font-weight: 600; margin-bottom: 8px;
+  color: var(--accent);
+}
+
+.code-block {
+  position: relative; margin-bottom: 12px; border-radius: var(--radius);
+  overflow: hidden; border: 1px solid var(--border);
+}
+.code-block pre {
+  margin: 0 !important; padding: 14px 16px !important;
+  background: #0d1117 !important; overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.76rem;
+  line-height: 1.6;
+}
+.code-block pre code { background: none !important; padding: 0 !important; }
+.code-block .copy-btn {
+  position: absolute; top: 6px; right: 6px;
+  background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+  color: var(--muted); padding: 4px 10px; border-radius: 6px;
+  font-size: 0.62rem; cursor: pointer; font-family: inherit;
+  transition: all 0.15s; opacity: 0;
+}
+.code-block:hover .copy-btn { opacity: 1; }
+.code-block .copy-btn:hover { background: rgba(255,255,255,0.1); color: var(--text); }
+.code-block .copy-btn.copied { background: rgba(34,197,94,0.15); color: var(--green); border-color: rgba(34,197,94,0.3); }
+
+.table-wrap {
+  overflow-x: auto; margin-bottom: 12px; border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+table {
+  width: 100%; border-collapse: collapse; font-size: 0.74rem;
+}
+table th, table td {
+  padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border);
+}
+table th { background: rgba(255,255,255,0.03); font-weight: 600; color: var(--muted); text-transform: uppercase; font-size: 0.62rem; letter-spacing: 0.04em; }
+table td { color: var(--text); }
+table tr:last-child td { border-bottom: none; }
+table code { font-size: 0.7rem; padding: 1px 5px; background: rgba(255,255,255,0.04); border-radius: 3px; }
+
+.footer {
+  text-align: center; padding: 32px 0; margin-top: 20px;
+  border-top: 1px solid var(--border); color: var(--muted); font-size: 0.7rem;
+}
+.footer a { color: var(--accent); text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+
+@media (max-width: 800px) {
+  .sidebar { display: none; }
+  .main { padding: 24px 20px; }
+  .main h1 { font-size: 1.2rem; }
+  .code-block pre { font-size: 0.68rem; padding: 10px 12px !important; }
+  .code-block .copy-btn { opacity: 1; }
+}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="logo">
+    <h1>SQL Snowflake</h1>
+    <span>Referencia COF-C03 &middot; 15 categor&iacute;as</span>
+  </div>
+  <nav>
+    <a class="section" href="#s1">1. Consultas (SELECT)</a>
+    <a class="sub" href="#s1-1">SELECT b&aacute;sico</a>
+    <a class="sub" href="#s1-2">Funciones de cadena</a>
+    <a class="sub" href="#s1-3">Funciones de fecha</a>
+    <a class="sub" href="#s1-4">Agregaci&oacute;n</a>
+    <a class="sub" href="#s1-5">JOINs</a>
+    <a class="sub" href="#s1-6">CTEs (WITH)</a>
+    <a class="sub" href="#s1-7">SELECT *</a>
+    <a class="sub" href="#s1-8">LIMIT y ORDER BY</a>
+    <a class="sub" href="#s1-9">Semiestructurados</a>
+    <a class="sub" href="#s1-10">Ventana</a>
+    <a class="section" href="#s2">2. DDL</a>
+    <a class="sub" href="#s2-1">BD y esquemas</a>
+    <a class="sub" href="#s2-2">Tablas</a>
+    <a class="sub" href="#s2-3">Vistas</a>
+    <a class="sub" href="#s2-4">Dynamic Tables</a>
+    <a class="sub" href="#s2-5">Tablas externas</a>
+    <a class="section" href="#s3">3. DML</a>
+    <a class="section" href="#s4">4. DCL</a>
+    <a class="sub" href="#s4-1">Roles</a>
+    <a class="sub" href="#s4-2">Privilegios</a>
+    <a class="section" href="#s5">5. Time Travel</a>
+    <a class="section" href="#s6">6. Zero-Copy Clone</a>
+    <a class="section" href="#s7">7. Stages y carga</a>
+    <a class="sub" href="#s7-1">Stages</a>
+    <a class="sub" href="#s7-2">COPY INTO (carga)</a>
+    <a class="sub" href="#s7-3">COPY INTO (descarga)</a>
+    <a class="sub" href="#s7-4">Formatos</a>
+    <a class="sub" href="#s7-5">Snowpipe</a>
+    <a class="sub" href="#s7-6">No estructurados</a>
+    <a class="section" href="#s8">8. Warehouses</a>
+    <a class="section" href="#s9">9. Tasks & Streams</a>
+    <a class="section" href="#s10">10. Gobernanza</a>
+    <a class="sub" href="#s10-1">Masking</a>
+    <a class="sub" href="#s10-2">Row Access</a>
+    <a class="sub" href="#s10-3">Network</a>
+    <a class="sub" href="#s10-4">Resource Monitors</a>
+    <a class="sub" href="#s10-5">Tagging</a>
+    <a class="sub" href="#s10-6">Alertas</a>
+    <a class="sub" href="#s10-7">Cifrado</a>
+    <a class="section" href="#s11">11. Colaboraci&oacute;n</a>
+    <a class="section" href="#s12">12. Monitoreo</a>
+    <a class="section" href="#s13">13. Cortex AI</a>
+    <a class="section" href="#s14">14. Funciones sistema</a>
+    <a class="section" href="#s15">15. Convenciones</a>
+  </nav>
+  <div class="back-link">
+    <a href="../index.html">&larr; Volver al inicio</a>
+  </div>
+</div>
+
+<div class="main">
+  <h1>Referencia SQL Snowflake</h1>
+  <p class="subtitle">Compendio de sintaxis SQL para Snowflake organizado por categor&iacute;as &middot; SnowPro Core COF-C03</p>
+
+  <!-- ============ 1. SELECT ============ -->
+  <div class="category" id="s1">
+    <h2><span style="color:var(--accent)">1.</span> Consultas (SELECT)</h2>
+
+    <h3 id="s1-1">1.1 SELECT b&aacute;sico</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">SELECT columna1, columna2
+FROM tabla;</code></pre>
+    </div>
+
+    <h3 id="s1-2">1.2 Funciones de cadena</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">SELECT INITCAP(pizza_type_id) AS capitalized_pizza_id FROM pizza_type;
+SELECT UPPER(nombre) AS nombre_mayuscula FROM clientes;
+SELECT LOWER(email) AS email_minuscula FROM usuarios;
+SELECT CONCAT(nombre, ' ', apellido) AS nombre_completo FROM empleados;
+SELECT CONCAT(name, ' - ', category) AS name_and_category FROM pizza_type;
+SELECT SUBSTR(descripcion, 1, 10) AS resumen FROM productos;
+SELECT TRIM('  texto  ') AS limpio;
+SELECT REPLACE(telefono, '-', '') AS telefono_limpio FROM contactos;
+SELECT LENGTH(codigo) AS longitud FROM referencias;
+SELECT SPLIT(direccion, ',') AS partes_direccion FROM domicilios;</code></pre>
+    </div>
+
+    <h3 id="s1-3">1.3 Funciones de fecha</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">SELECT CURRENT_DATE, CURRENT_TIME;
+SELECT CURRENT_DATE;
+SELECT CURRENT_TIMESTAMP;
+SELECT DATEADD(day, 7, fecha_pedido) AS fecha_vencimiento FROM pedidos;
+SELECT DATEDIFF(day, fecha_inicio, fecha_fin) AS dias FROM periodos;
+SELECT DATE_TRUNC(month, fecha) AS mes FROM ventas;
+SELECT EXTRACT(year FROM fecha_pedido) AS a&ntilde;o FROM pedidos;
+SELECT COUNT(*) AS orders_per_day,
+       EXTRACT(weekday FROM order_date) AS order_day
+FROM orders
+GROUP BY order_day
+ORDER BY orders_per_day DESC;
+SELECT LAST_DAY(fecha) AS fin_mes FROM calendario;</code></pre>
+    </div>
+
+    <h3 id="s1-4">1.4 Funciones de agregaci&oacute;n</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">SELECT COUNT(*) AS total FROM clientes;
+SELECT SUM(monto) AS ingresos_totales FROM ventas;
+SELECT AVG(calificacion) AS promedio FROM evaluaciones;
+SELECT MIN(precio) AS mas_barato, MAX(precio) AS mas_caro FROM productos;
+SELECT categoria, COUNT(*) AS cantidad FROM productos GROUP BY categoria;
+SELECT categoria, SUM(stock) AS total_stock FROM productos GROUP BY categoria HAVING total_stock > 100;</code></pre>
+    </div>
+
+    <h3 id="s1-5">1.5 JOINs</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">SELECT c.nombre, p.monto
+FROM clientes c
+INNER JOIN pagos p ON c.id = p.cliente_id;
+
+-- JOIN con USING (columna con mismo nombre)
+SELECT EXTRACT(month FROM order_date) AS order_month,
+       p.pizza_size,
+       SUM(p.price * od.quantity) AS revenue
+FROM orders o
+INNER JOIN order_details od USING(order_id)
+INNER JOIN pizzas p USING(pizza_id)
+GROUP BY ALL
+ORDER BY revenue DESC;
+
+SELECT c.nombre, p.monto
+FROM clientes c
+LEFT JOIN pagos p ON c.id = p.cliente_id;
+
+SELECT c.nombre, p.monto
+FROM clientes c
+RIGHT JOIN pagos p ON c.id = p.cliente_id;
+
+SELECT c.nombre, p.monto
+FROM clientes c
+FULL OUTER JOIN pagos p ON c.id = p.cliente_id;</code></pre>
+    </div>
+
+    <h3 id="s1-6">1.6 CTEs (WITH)</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">WITH ventas_altas AS (
+    SELECT cliente_id, SUM(monto) AS total
+    FROM pagos
+    GROUP BY cliente_id
+    HAVING total > 1000
+)
+SELECT c.nombre, v.total
+FROM clientes c
+JOIN ventas_altas v ON c.id = v.cliente_id;</code></pre>
+    </div>
+
+    <h3 id="s1-7">1.7 SELECT *</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">SELECT * FROM clientes;  -- Todas las columnas
+SELECT v.*, c.nombre FROM ventas v JOIN clientes c ON v.cliente_id = c.id;</code></pre>
+    </div>
+
+    <h3 id="s1-8">1.8 LIMIT y ORDER BY</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">SELECT nombre, salario
+FROM empleados
+ORDER BY salario DESC
+LIMIT 10;
+
+-- Sin ORDER BY el resultado es NO DETERMINISTA
+SELECT * FROM eventos LIMIT 5;</code></pre>
+    </div>
+
+    <h3 id="s1-9">1.9 Datos semiestructurados (VARIANT)</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">SELECT columna:campo::STRING AS valor FROM tabla_json;
+SELECT columna:objeto.campo::INT AS numero FROM tabla_json;
+SELECT columna[0]::STRING AS primer_elemento FROM tabla_array;
+
+SELECT * FROM TABLE(FLATTEN(INPUT => PARSE_JSON('{"a":1,"b":2}')));
+-- Columnas: SEQ, KEY, PATH, INDEX, VALUE, THIS
+-- VALUE contiene el dato real desanidado</code></pre>
+    </div>
+
+    <h3 id="s1-10">1.10 Funciones de ventana</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">SELECT nombre, departamento, salario,
+       ROW_NUMBER() OVER (PARTITION BY dept ORDER BY salario DESC) AS ranking
+FROM empleados;
+
+SELECT fecha, monto,
+       SUM(monto) OVER (ORDER BY fecha) AS acumulado
+FROM ventas;
+
+SELECT nombre, salario, departamento,
+       RANK() OVER (PARTITION BY dept ORDER BY salario DESC) AS rango
+FROM empleados;
+
+SELECT nombre, salario, departamento,
+       LAG(salario) OVER (PARTITION BY dept ORDER BY salario) AS anterior,
+       LEAD(salario) OVER (PARTITION BY dept ORDER BY salario) AS siguiente
+FROM empleados;
+
+SELECT departamento,
+       AVG(salario) OVER (PARTITION BY departamento) AS promedio_dept
+FROM empleados;</code></pre>
+    </div>
+  </div>
+
+  <!-- ============ 2. DDL ============ -->
+  <div class="category" id="s2">
+    <h2><span style="color:#22c55e">2.</span> DDL — Creaci&oacute;n y modificaci&oacute;n</h2>
+
+    <h3 id="s2-1">2.1 Bases de datos y esquemas</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">CREATE DATABASE mi_bd;
+CREATE SCHEMA mi_bd.mi_esquema;
+USE DATABASE mi_bd;
+USE SCHEMA mi_bd.mi_esquema;
+DROP DATABASE mi_bd;
+DROP SCHEMA mi_bd.mi_esquema;</code></pre>
+    </div>
+
+    <h3 id="s2-2">2.2 Tablas</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">CREATE TABLE clientes (
+    id INT AUTOINCREMENT,
+    nombre STRING(100), email STRING,
+    fecha_registro DATE, activo BOOLEAN DEFAULT TRUE
+);
+
+-- Tipos de tabla
+CREATE PERMANENT TABLE p (id INT);    -- 1-90d Time Travel
+CREATE TRANSIENT TABLE t (id INT);    -- max 1d Time Travel
+CREATE TEMPORARY TABLE tmp (id INT);  -- solo sesi&oacute;n
+
+-- Zero-copy cloning
+CREATE TABLE t2 CLONE t1;
+CREATE TABLE t3 CLONE t1 AT(TIMESTAMP => '2026-07-01');
+CREATE DATABASE d2 CLONE d1;
+
+-- Clustering
+CREATE TABLE pedidos (id INT, fecha DATE, monto NUMBER)
+CLUSTER BY (cliente_id, fecha);
+ALTER TABLE pedidos CLUSTER BY (cliente_id, fecha);
+ALTER TABLE pedidos DROP CLUSTERING KEY;</code></pre>
+    </div>
+
+    <h3 id="s2-3">2.3 Vistas</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">CREATE VIEW clientes_activos AS
+SELECT id, nombre FROM clientes WHERE activo = TRUE;
+
+CREATE SECURE VIEW clientes_anonymized AS
+SELECT id, '***' AS nombre, SUBSTR(email,1,3)||'@...' AS email FROM clientes;
+
+CREATE MATERIALIZED VIEW mv_categoria AS
+SELECT categoria, COUNT(*) AS cantidad FROM productos GROUP BY categoria;</code></pre>
+    </div>
+
+    <h3 id="s2-4">2.4 Dynamic Tables</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">CREATE DYNAMIC TABLE daily_sales
+TARGET_LAG = '5 minutes'
+WAREHOUSE = my_wh
+AS
+SELECT order_date, SUM(amount) AS total
+FROM orders
+GROUP BY order_date;</code></pre>
+    </div>
+
+    <h3 id="s2-5">2.5 Tablas externas</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">CREATE EXTERNAL TABLE ext_orders
+LOCATION = @ext_stage
+FILE_FORMAT = (TYPE = PARQUET);</code></pre>
+    </div>
+  </div>
+
+  <!-- ============ 3. DML ============ -->
+  <div class="category" id="s3">
+    <h2><span style="color:#f97316">3.</span> DML — Manipulaci&oacute;n de datos</h2>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">INSERT INTO clientes (nombre, email) VALUES ('Juan P&eacute;rez', 'juan@email.com');
+INSERT INTO clientes SELECT * FROM clientes_backup;
+
+UPDATE clientes SET activo = FALSE WHERE id = 1;
+DELETE FROM clientes WHERE activo = FALSE;
+
+MERGE INTO clientes c
+USING clientes_actualizados a ON c.id = a.id
+WHEN MATCHED THEN UPDATE SET c.nombre = a.nombre, c.email = a.email
+WHEN NOT MATCHED THEN INSERT (id, nombre, email) VALUES (a.id, a.nombre, a.email);
+
+TRUNCATE TABLE clientes;
+DROP TABLE clientes;</code></pre>
+    </div>
+  </div>
+
+  <!-- ============ 4. DCL ============ -->
+  <div class="category" id="s4">
+    <h2><span style="color:#a78bfa">4.</span> DCL — Control de acceso</h2>
+    <h3 id="s4-1">4.1 Roles</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">CREATE ROLE analyst;
+CREATE ROLE data_engineer;
+
+-- Jerarqu&iacute;a
+GRANT ROLE access_read TO ROLE analyst;
+GRANT ROLE analyst TO ROLE data_engineer;
+GRANT ROLE data_engineer TO ROLE sysadmin;
+
+-- Asignar a usuario
+GRANT ROLE analyst TO USER usuario1;
+SET SECONDARY ROLES ALL;  -- Roles secundarios en sesi&oacute;n</code></pre>
+    </div>
+    <h3 id="s4-2">4.2 Privilegios</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">GRANT USAGE ON DATABASE mi_bd TO ROLE analyst;
+GRANT SELECT ON ALL TABLES IN SCHEMA mi_bd.mi_esquema TO ROLE analyst;
+GRANT SELECT ON FUTURE TABLES IN SCHEMA mi_bd.mi_esquema TO ROLE analyst;
+GRANT INSERT, UPDATE ON TABLE mi_bd.mi_esquema.pedidos TO ROLE analyst;
+GRANT ALL PRIVILEGES ON WAREHOUSE mi_wh TO ROLE analyst;
+
+REVOKE SELECT ON TABLE mi_bd.mi_esquema.clientes FROM ROLE analyst;</code></pre>
+    </div>
+  </div>
+
+  <!-- ============ 5. Time Travel ============ -->
+  <div class="category" id="s5">
+    <h2><span style="color:#06b6d4">5.</span> Time Travel y Fail-safe</h2>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">SELECT * FROM table AT(TIMESTAMP => '2026-07-01 10:00:00');
+SELECT * FROM table BEFORE(STATEMENT => '019a8b50-...');
+SELECT * FROM table AT(OFFSET => -300);  -- 5 minutos atr&aacute;s
+
+ALTER TABLE table SET DATA_RETENTION_TIME_IN_DAYS = 3;
+ALTER TABLE table SET DATA_RETENTION_TIME_IN_DAYS = 90;  -- Enterprise+
+
+UNDROP TABLE table;
+UNDROP SCHEMA schema;
+UNDROP DATABASE database;</code></pre>
+    </div>
+  </div>
+
+  <!-- ============ 6. Clone ============ -->
+  <div class="category" id="s6">
+    <h2><span style="color:#06b6d4">6.</span> Clonaci&oacute;n Zero-Copy</h2>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">CREATE TABLE copia CLONE original;
+CREATE DATABASE copia_bd CLONE original_bd;
+
+-- En punto temporal
+CREATE TABLE copia CLONE original AT(TIMESTAMP => '2026-07-01 12:00:00');
+CREATE TABLE copia CLONE original AT(OFFSET => -3600);</code></pre>
+    </div>
+  </div>
+
+  <!-- ============ 7. Stages ============ -->
+  <div class="category" id="s7">
+    <h2><span style="color:#22c55e">7.</span> Stages y carga de datos</h2>
+    <h3 id="s7-1">7.1 Stages</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">LIST @~;            -- User stage
+LIST @%table_name;  -- Table stage
+LIST @named_stage;  -- Named stage
+
+CREATE STAGE mi_stage;
+CREATE STAGE ext_stage
+  URL = 's3://bucket/path/'
+  STORAGE_INTEGRATION = mi_integracion;
+
+CREATE STAGE ext_stage_azure
+  URL = 'azure://storage.blob.core.windows.net/container/path/'
+  CREDENTIALS = (AZURE_SAS_TOKEN = '...');
+
+DROP STAGE mi_stage;</code></pre>
+    </div>
+    <h3 id="s7-2">7.2 COPY INTO (Carga)</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">COPY INTO mi_tabla
+FROM @mi_stage
+FILE_FORMAT = (TYPE = CSV SKIP_HEADER = 1);
+
+COPY INTO mi_tabla (col1, col2)
+FROM @mi_stage/data/
+FILE_FORMAT = (TYPE = JSON STRIP_OUTER_ARRAY = TRUE);
+
+-- Validaci&oacute;n sin cargar
+COPY INTO mi_tabla
+FROM @mi_stage
+VALIDATION_MODE = RETURN_ERRORS;</code></pre>
+    </div>
+    <h3 id="s7-3">7.3 COPY INTO (Descarga)</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">COPY INTO @mi_stage/data/
+FROM mi_tabla
+FILE_FORMAT = (TYPE = PARQUET);
+
+COPY INTO @mi_stage/report.csv
+FROM (SELECT id, nombre, fecha FROM clientes WHERE activo = TRUE)
+FILE_FORMAT = (TYPE = CSV HEADER = TRUE);</code></pre>
+    </div>
+    <h3 id="s7-4">7.4 Formatos de archivo</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">CREATE FILE FORMAT csv_fmt
+  TYPE = CSV SKIP_HEADER = 1
+  FIELD_OPTIONALLY_ENCLOSED_BY = '"';
+
+CREATE FILE FORMAT json_fmt
+  TYPE = JSON STRIP_OUTER_ARRAY = TRUE;
+
+CREATE FILE FORMAT parquet_fmt TYPE = PARQUET;
+CREATE FILE FORMAT avro_fmt TYPE = AVRO;</code></pre>
+    </div>
+    <h3 id="s7-5">7.5 Snowpipe</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">CREATE PIPE mi_pipe AS
+  COPY INTO mi_tabla
+  FROM @mi_stage
+  FILE_FORMAT = (TYPE = CSV SKIP_HEADER = 1);
+
+ALTER PIPE mi_pipe REFRESH;  -- Carga manual
+ALTER PIPE mi_pipe SET PIPE_EXECUTION_PAUSED = TRUE;
+ALTER PIPE mi_pipe SET PIPE_EXECUTION_PAUSED = FALSE;
+DROP PIPE mi_pipe;</code></pre>
+    </div>
+    <h3 id="s7-6">7.6 Datos no estructurados</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">SELECT PARSE_DOCUMENT('@stage/reporte.pdf', 'PDF')::STRING AS contenido;
+SELECT PARSE_DOCUMENT('@stage/doc.docx', 'DOCX')::STRING AS texto;
+
+ALTER STAGE mi_stage SET DIRECTORY = (ENABLE = TRUE);</code></pre>
+    </div>
+  </div>
+
+  <!-- ============ 8. Warehouses ============ -->
+  <div class="category" id="s8">
+    <h2><span style="color:#f97316">8.</span> Warehouses</h2>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">CREATE WAREHOUSE mi_wh
+  WAREHOUSE_SIZE = 'XSMALL'       -- XSMALL a 6X-LARGE
+  AUTO_SUSPEND = 5                -- Minutos de inactividad
+  AUTO_RESUME = TRUE
+  MIN_CLUSTER_COUNT = 1
+  MAX_CLUSTER_COUNT = 3           -- Multi-cluster
+  SCALING_POLICY = 'STANDARD'
+  INITIALLY_SUSPENDED = TRUE;
+
+ALTER WAREHOUSE mi_wh SET WAREHOUSE_SIZE = 'SMALL';
+ALTER WAREHOUSE mi_wh SUSPEND;
+ALTER WAREHOUSE mi_wh RESUME;
+DROP WAREHOUSE mi_wh;</code></pre>
+    </div>
+  </div>
+
+  <!-- ============ 9. Tasks & Streams ============ -->
+  <div class="category" id="s9">
+    <h2><span style="color:#eab308">9.</span> Tasks y Streams</h2>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">-- Stream (CDC)
+CREATE STREAM cambios_pedidos ON TABLE pedidos;
+SELECT * FROM cambios_pedidos;
+-- Columnas: METADATA$ACTION, METADATA$ISUPDATE, METADATA$ROW_ID
+
+-- Task programada
+CREATE TASK procesar_pedidos
+  WAREHOUSE = mi_wh
+  SCHEDULE = '5 MINUTE'
+AS
+  INSERT INTO log_pedidos SELECT * FROM cambios_pedidos;
+
+-- Task encadenada
+CREATE TASK limpiar_temp
+  AFTER procesar_pedidos
+AS
+  DELETE FROM pedidos_temp WHERE procesado = TRUE;
+
+ALTER TASK procesar_pedidos RESUME;
+ALTER TASK procesar_pedidos SUSPEND;
+DROP TASK procesar_pedidos;</code></pre>
+    </div>
+  </div>
+
+  <!-- ============ 10. Gobernanza ============ -->
+  <div class="category" id="s10">
+    <h2><span style="color:#ef4444">10.</span> Gobernanza y seguridad</h2>
+    <h3 id="s10-1">10.1 Masking Policies</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">CREATE MASKING POLICY email_mask AS (val STRING) RETURNS STRING ->
+  CASE WHEN CURRENT_ROLE() IN ('ADMIN') THEN val ELSE '***' END;
+
+ALTER TABLE usuarios MODIFY COLUMN email SET MASKING POLICY email_mask;
+ALTER TABLE usuarios MODIFY COLUMN email UNSET MASKING POLICY;
+DROP MASKING POLICY email_mask;</code></pre>
+    </div>
+    <h3 id="s10-2">10.2 Row Access Policies</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">CREATE ROW ACCESS POLICY region_filter AS (region STRING) RETURNS BOOLEAN ->
+  CURRENT_ROLE() IN ('ADMIN', 'GLOBAL') OR region = 'PUBLIC';
+
+ALTER TABLE ventas ADD ROW ACCESS POLICY region_filter ON (region);
+ALTER TABLE ventas DROP ROW ACCESS POLICY region_filter;
+DROP ROW ACCESS POLICY region_filter;</code></pre>
+    </div>
+    <h3 id="s10-3">10.3 Network Policies</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">CREATE NETWORK RULE red_oficina
+  TYPE = IPV4
+  VALUE_LIST = ('192.168.1.0/24', '10.0.0.0/8');
+
+CREATE NETWORK POLICY politica_red
+  ALLOWED_NETWORK_RULE_LIST = ('red_oficina');
+
+ALTER ACCOUNT SET NETWORK POLICY = politica_red;
+ALTER ACCOUNT UNSET NETWORK POLICY;
+DROP NETWORK POLICY politica_red;</code></pre>
+    </div>
+    <h3 id="s10-4">10.4 Resource Monitors</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">CREATE RESOURCE MONITOR limite_mensual
+  WITH CREDIT_QUOTA = 100
+  FREQUENCY = MONTHLY
+  START_TIMESTAMP = '2026-07-01'
+  TRIGGERS
+    ON 80% DO NOTIFY
+    ON 100% DO SUSPEND
+    ON 110% DO SUSPEND_IMMEDIATE;
+
+ALTER WAREHOUSE mi_wh SET RESOURCE_MONITOR = limite_mensual;
+DROP RESOURCE MONITOR limite_mensual;</code></pre>
+    </div>
+    <h3 id="s10-5">10.5 Object Tagging</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">CREATE TAG sensibilidad ALLOWED_VALUES 'PII', 'CONFIDENTIAL', 'PUBLIC';
+ALTER TABLE clientes MODIFY COLUMN email SET TAG sensibilidad = 'PII';
+ALTER TABLE clientes MODIFY COLUMN nombre SET TAG sensibilidad = 'PUBLIC';
+
+SELECT * FROM TABLE(INFORMATION_SCHEMA.TAG_REFERENCES('clientes', 'TABLE'));</code></pre>
+    </div>
+    <h3 id="s10-6">10.6 Alertas</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">CREATE ALERT notificar_alta_demanda
+  WAREHOUSE = mi_wh
+  SCHEDULE = '10 MINUTE'
+  IF (EXISTS (SELECT 1 FROM metricas WHERE uso_cpu > 90))
+  THEN
+    CALL SYSTEM$SEND_SNOWFLAKE_NOTIFICATION(
+      '{"message":"Alto uso de CPU detectado"}'
+    );</code></pre>
+    </div>
+    <h3 id="s10-7">10.7 Cifrado y replicaci&oacute;n</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">ALTER DATABASE mi_bd ENABLE REPLICATION TO ACCOUNTS org.cuenta_secundaria;
+
+CREATE FAILOVER GROUP mi_grupo
+  OBJECT_TYPES = DATABASES, WAREHOUSES, ROLES
+  ALLOWED_DATABASES = mi_bd
+  ALLOWED_ACCOUNTS = org.cuenta_secundaria;</code></pre>
+    </div>
+  </div>
+
+  <!-- ============ 11. Colaboración ============ -->
+  <div class="category" id="s11">
+    <h2><span style="color:#a855f7">11.</span> Colaboraci&oacute;n y Data Sharing</h2>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">-- Proveedor
+CREATE SHARE ventas_share;
+GRANT USAGE ON DATABASE mi_bd TO SHARE ventas_share;
+GRANT SELECT ON TABLE mi_bd.public.ventas TO SHARE ventas_share;
+ALTER SHARE ventas_share ADD ACCOUNTS = org.consumidor;
+
+-- Consumidor
+CREATE DATABASE ventas_compartidas FROM SHARE org.proveedor.ventas_share;
+
+-- Reader Account (socios sin Snowflake)
+CREATE MANAGED ACCOUNT socio_reader
+  ADMIN_NAME = 'admin_socio'
+  ADMIN_PASSWORD = '...'
+  TYPE = READER;
+
+DROP SHARE ventas_share;</code></pre>
+    </div>
+  </div>
+
+  <!-- ============ 12. Monitoreo ============ -->
+  <div class="category" id="s12">
+    <h2><span style="color:#6b7280">12.</span> Monitoreo y optimizaci&oacute;n</h2>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">EXPLAIN SELECT * FROM pedidos JOIN clientes ON pedidos.cliente_id = clientes.id;
+
+ALTER SESSION SET USE_CACHED_RESULT = FALSE;
+SELECT SYSTEM$CLUSTERING_DEPTH('pedidos');
+SELECT SYSTEM$CLUSTERING_INTERVAL('pedidos', 'fecha');
+
+ALTER TABLE pedidos ADD SEARCH OPTIMIZATION;
+ALTER TABLE pedidos ADD SEARCH OPTIMIZATION ON (cliente_id, email);
+
+-- Information Schema
+SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'PUBLIC';
+
+-- Account Usage
+SELECT * FROM SNOWFLAKE.ACCOUNT_USAGE.QUERY_HISTORY
+WHERE USER_NAME = 'USUARIO1'
+ORDER BY START_TIME DESC LIMIT 100;
+
+SHOW TABLES; SHOW SCHEMAS; SHOW WAREHOUSES; SHOW ROLES;
+SHOW GRANTS TO ROLE analyst;
+SHOW FUTURE GRANTS TO ROLE analyst;
+DESCRIBE TABLE clientes;</code></pre>
+    </div>
+  </div>
+
+  <!-- ============ 13. Cortex AI ============ -->
+  <div class="category" id="s13">
+    <h2><span style="color:#06b6d4">13.</span> Notebooks y Cortex AI</h2>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">-- Notebook: celda SQL con variable Python
+SELECT '{{myvar}}' AS resultado;
+
+-- Cortex AI
+SELECT COMPLETE('snowflake-arctic', 'Resume: Snowflake es...') AS resumen;
+-- Celda verde = ejecutada sin errores</code></pre>
+    </div>
+  </div>
+
+  <!-- ============ 14. Sistema ============ -->
+  <div class="category" id="s14">
+    <h2><span style="color:#6b7280">14.</span> Funciones de sistema &uacute;tiles</h2>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copySql(this)">Copiar</button>
+      <pre><code class="language-sql">SELECT CURRENT_ROLE();
+SELECT CURRENT_USER();
+SELECT CURRENT_DATABASE();
+SELECT CURRENT_SCHEMA();
+SELECT CURRENT_WAREHOUSE();
+SELECT CURRENT_ACCOUNT();
+SELECT CURRENT_REGION();
+SELECT CURRENT_VERSION();
+
+SELECT SYSTEM$TYPEOF(valor_variant);
+SELECT SYSTEM$CLUSTERING_DEPTH('tabla');
+SELECT PARSE_JSON('{"clave": "valor"}');
+SELECT TRY_PARSE_JSON('{"invalido"}');  -- NULL si no es JSON v&aacute;lido
+SELECT HASH('*');</code></pre>
+    </div>
+  </div>
+
+  <!-- ============ 15. Convenciones ============ -->
+  <div class="category" id="s15">
+    <h2><span style="color:#6b7280">15.</span> Convenciones y buenas pr&aacute;cticas</h2>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Regla</th><th>Detalle</th></tr>
+        <tr><td><b>May&uacute;sculas</b></td><td>Palabras reservadas en may&uacute;sculas (<code>SELECT</code>, <code>FROM</code>, <code>WHERE</code>)</td></tr>
+        <tr><td><b>Punto y coma</b></td><td>Toda sentencia termina en <code>;</code></td></tr>
+        <tr><td><b>Comentarios</b></td><td><code>--</code> para l&iacute;nea, <code>/* */</code> para bloque</td></tr>
+        <tr><td><b>Nombres</b></td><td>Sin espacios, usar <code>snake_case</code></td></tr>
+        <tr><td><b>Comillas dobles</b></td><td>Para identificadores especiales: <code>"Mi Tabla"</code></td></tr>
+        <tr><td><b>Contexto</b></td><td><code>USE DATABASE</code> + <code>USE SCHEMA</code> antes de operar</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer">
+    Material de estudio para <a href="https://learn.snowflake.com/">SnowPro Core COF-C03</a> &middot;
+    Basado en documentaci&oacute;n oficial Snowflake y DataCamp &middot;
+    <a href="../index.html">Volver al inicio</a>
+  </div>
+</div>
+
+<script>
+function copySql(btn) {
+  const code = btn.nextElementSibling.querySelector('code') || btn.nextElementSibling;
+  const text = code.textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copiado';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copiar'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>
