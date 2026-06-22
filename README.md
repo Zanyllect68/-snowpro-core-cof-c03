@@ -1,77 +1,144 @@
-# SnowPro Core COF-C03 — Recursos de Estudio
-
 <p align="center">
-  <img src="https://img.shields.io/badge/Estado-Activo-22c55e?style=flat-square" alt="Estado: Activo">
-  <img src="https://img.shields.io/badge/Examen-COF--C03-3b82f6?style=flat-square" alt="Examen COF-C03">
-  <img src="https://img.shields.io/badge/Idioma-Español-ef4444?style=flat-square" alt="Idioma Español">
-  <img src="https://img.shields.io/badge/Archivos-35-6b7280?style=flat-square" alt="35 archivos">
-  <img src="https://img.shields.io/badge/Días-46-eab308?style=flat-square" alt="46 días">
-  <img src="https://img.shields.io/badge/Horas-60-a855f7?style=flat-square" alt="60 horas">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/SnowPro%20Core%20COF--C03-0f1117?style=for-the-badge&logo=snowflake&logoColor=white&labelColor=29B5E8">
+    <img alt="SnowPro Core COF-C03" src="https://img.shields.io/badge/SnowPro%20Core%20COF--C03-0f1117?style=for-the-badge&logo=snowflake&logoColor=white&labelColor=29B5E8">
+  </picture>
 </p>
 
-> Repositorio completo de estudio para la certificación **SnowPro Core (COF-C03)**.
-> Incluye apuntes teóricos, guías DORA prácticas, calendario interactivo, plan de estudio, tutorial para principiantes y 30 preguntas tipo examen.
+<p align="center">
+  <b>Recursos completos en español para la certificación SnowPro Core</b>
+  <br>
+  📚 Apuntes teóricos · 🧪 Guías DORA · 📅 Calendario interactivo · 📝 30 preguntas tipo · 🗄️ Referencia SQL
+</p>
 
-## Estructura del repositorio
+<p align="center">
+  <a href="https://github.com/Zanyllect68/-snowpro-core-cof-c03/stargazers">
+    <img src="https://img.shields.io/github/stars/Zanyllect68/-snowpro-core-cof-c03?style=flat-square&logo=github&color=eab308" alt="Stars">
+  </a>
+  <a href="#estructura">
+    <img src="https://img.shields.io/badge/archivos-51-22c55e?style=flat-square" alt="51 archivos">
+  </a>
+  <a href="https://github.com/Zanyllect68/-snowpro-core-cof-c03/blob/master/LICENSE">
+    <img src="https://img.shields.io/badge/license-MIT-3b82f6?style=flat-square" alt="MIT License">
+  </a>
+  <a href="https://github.com/Zanyllect68/-snowpro-core-cof-c03">
+    <img src="https://img.shields.io/github/repo-size/Zanyllect68/-snowpro-core-cof-c03?style=flat-square&color=a78bfa" alt="Repo size">
+  </a>
+  <a href="https://github.com/Zanyllect68/-snowpro-core-cof-c03/commits/master">
+    <img src="https://img.shields.io/github/last-commit/Zanyllect68/-snowpro-core-cof-c03?style=flat-square&color=06b6d4" alt="Last commit">
+  </a>
+</p>
 
-```
-📁 01_Arquitectura/          → 5 archivos (arquitectura 3 capas, microparticiones, warehouses, tablas)
-📁 02_Gobernanza/            → 10 archivos (RBAC, masking, network policies, resource monitors, cifrado)
-📁 03_Carga_Descarga/        → 2 archivos (carga estructurada/semiestructurada, datos no estructurados)
-📁 04_Optimizacion/          → (contenido cubierto en archivos generales)
-📁 05_Colaboracion/          → 3 archivos (Data Sharing, Data Clean Rooms, Marketplace)
-📁 General/                   → 15 archivos + imágenes (apuntes maestros, guías, tutorial, plan horario, informe)
-```
+---
 
-## Cómo usar este material
+## ✨ Características
 
-### 1. Por tema (recomendado)
+- ✅ **35+ archivos** organizados por los 5 dominios del examen
+- ✅ **Landing page profesional** con calendario interactivo de 46 días
+- ✅ **Guía DORA** por tema del examen con sintaxis SQL y práctica
+- ✅ **30 preguntas tipo** con respuestas explicadas
+- ✅ **Referencia SQL completa** en web con syntax highlighting y botón copiar
+- ✅ **Tutorial para principiantes** desde cero
+- ✅ **100% en español** — único recurso completo en español en GitHub
+- ✅ **Listo para GitHub Pages** — despliegue en 1 clic
 
-Usa [`General/guia_dora_badges.md`](General/guia_dora_badges.md) — organizado por cada tema del examen, indica:
-- Qué insignia DORA lo practica
-- Dónde estudiarlo (archivo + sección)
-- Sintaxis SQL clave
-- Práctica recomendada
+## 🚀 Acceso rápido
 
-### 2. Por calendario
-
-Abre [`index.html`](index.html) — calendario interactivo con plan día por día (1 jul – 15 ago 2026, 46 días, 60h).
-
-### 3. Por archivo guía
-
-| Archivo | Qué contiene |
+| Recurso | Descripción |
 |---|---|
-| [`General/apuntes_snowpro_core.md`](General/apuntes_snowpro_core.md) | Apuntes completos de los 5 dominios + preguntas frecuentes + apéndices |
-| [`General/guia_completa_COF-C03.md`](General/guia_completa_COF-C03.md) | Mapeo dominio ↔ material existente + plan 30 días + checklist |
-| [`General/informe_snowflake.md`](General/informe_snowflake.md) | 30 preguntas tipo examen con respuestas y explicaciones |
-| [`General/plan_estudio_snowpro_core.md`](General/plan_estudio_snowpro_core.md) | 21 temas extendidos NO cubiertos en las 30 preguntas |
-| [`General/plan_horario_detallado.md`](General/plan_horario_detallado.md) | Cronograma día por día (30 días, 60 horas totales) |
-| [`General/Tutorial Snowflake - Principiante a Experto.md`](General/Tutorial%20Snowflake%20-%20Principiante%20a%20Experto.md) | Tutorial completo desde cero |
-| [`General/referencia_sql_snowflake.md`](General/referencia_sql_snowflake.md) | Referencia SQL completa con ejemplos por categoría |
+| [🌐 Landing page](https://zanyllect68.github.io/-snowpro-core-cof-c03) | Calendario interactivo + estructura del repo |
+| [📖 Apuntes completos](General/apuntes_snowpro_core.md) | 692 líneas cubriendo los 5 dominios |
+| [🗄️ Referencia SQL web](General/referencia_sql_snowflake.html) | 15 categorías con sintaxis destacada |
+| [🎯 Guía DORA por temas](General/guia_dora_badges.md) | Insignias → tema → SQL → práctica |
+| [📝 30 preguntas tipo](General/informe_snowflake.md) | Examen simulado con respuestas |
+| [📅 Plan horario detallado](General/plan_horario_detallado.md) | 30 días / 60 horas |
+| [📚 Tutorial principiante](General/Tutorial%20Snowflake%20-%20Principiante%20a%20Experto.md) | Desde cero hasta experto |
 
-### 4. Por dominio
+## 📂 Estructura
 
-Cada carpeta de dominio contiene archivos dedicados a ese tema específico del examen SnowPro Core.
+```
+📁 01_Arquitectura/          → 5 archivos  (31% del examen)
+📁 02_Gobernanza/            → 10 archivos (20% del examen)
+📁 03_Carga_Descarga/        → 2 archivos  (18% del examen)
+📁 04_Optimizacion/          → (en apuntes generales, 21% del examen)
+📁 05_Colaboracion/          → 3 archivos  (10% del examen)
+📁 General/                   → 16 archivos + imágenes
+  │
+  ├── apuntes_snowpro_core.md        ← Apuntes maestros (692 líneas)
+  ├── guia_dora_badges.md            ← DORA organizada por tema
+  ├── guia_completa_COF-C03.md       ← Mapeo completo dominio ↔ material
+  ├── informe_snowflake.md           ← 30 preguntas tipo examen
+  ├── plan_estudio_snowpro_core.md   ← 21 temas extendidos
+  ├── plan_horario_detallado.md      ← 30 días / 60 horas
+  ├── referencia_sql_snowflake.html  ← Web SQL con syntax highlighting
+  ├── referencia_sql_snowflake.md    ← Referencia SQL en markdown
+  └── Tutorial Snowflake - ...       ← Tutorial para principiantes
+```
 
-## Distribución del examen
+## 📊 Distribución del examen
 
-| Dominio | % | Preguntas |
+| Dominio | % | Preguntas | Archivos |
+|---|---|---|---|
+| 1. Arquitectura | 31% | ~31 | `01_Arquitectura/` |
+| 2. Gobernanza | 20% | ~20 | `02_Gobernanza/` |
+| 3. Carga y descarga | 18% | ~18 | `03_Carga_Descarga/` |
+| 4. Optimización | 21% | ~21 | `General/apuntes*` |
+| 5. Colaboración | 10% | ~10 | `05_Colaboracion/` |
+
+## 🏆 Badges DORA (práctica hands-on)
+
+Los talleres DORA son laboratorios gratuitos en [learn.snowflake.com](https://learn.snowflake.com/):
+
+| Insignia | Temas | Cobertura |
 |---|---|---|
-| 1. Arquitectura y características | 31% | ~31 |
-| 2. Gestión de cuentas y gobernanza | 20% | ~20 |
-| 3. Carga, descarga y conectividad | 18% | ~18 |
-| 4. Optimización y transformación | 21% | ~21 |
-| 5. Colaboración de datos | 10% | ~10 |
+| **1** — Data Warehousing | Microparticiones, clustering, TIME TRAVEL, warehouses | ~40% del examen |
+| **2** — Collaboration & Marketplace | Data Sharing, Reader Accounts, Marketplace | ~15% |
+| **5** — Data Engineering | Dynamic Tables, Streams, Tasks, clustering | ~25% |
 
-## Badges DORA (práctica hands-on)
+Cada insignia está mapeada a temas específicos en [`guia_dora_badges.md`](General/guia_dora_badges.md).
 
-Los talleres DORA son laboratorios gratuitos en [learn.snowflake.com](https://learn.snowflake.com/).
-Cada insignia cubre distintos temas del examen. La ruta recomendada:
+## 🛠️ Referencia SQL incluida
 
-1. **Insignia 1** — Data Warehousing (~40% del examen)
-2. **Insignia 2** — Collaboration, Marketplace & Cost (~15%)
-3. **Insignia 5** — Data Engineering (~25%)
+| Categoría | Ejemplos |
+|---|---|
+| SELECT, JOINs, subconsultas, CTEs | INNER/LEFT/RIGHT/FULL/NATURAL/LATERAL JOIN, WITH, UNION ALL |
+| Funciones | cadena, fecha, agregación, ventana, semiestructurados |
+| DDL | CREATE TABLE/VIEW/DATABASE/SCHEMA, clustering, cloning |
+| DML | INSERT, UPDATE, DELETE, MERGE, COPY INTO |
+| DCL | Roles, privilegios, jerarquía |
+| Gobernanza | Masking, Row Access, Network Policies, Resource Monitors |
+| Optimización | EXPLAIN, Search Optimization, early filtering, LIMIT |
 
-## Licencia
+Disponible en [versión web](General/referencia_sql_snowflake.html) y [markdown](General/referencia_sql_snowflake.md).
 
-Este material es de uso personal y educativo. Basado en la documentación oficial de Snowflake y el contenido de DataCamp.
+## 🌐 GitHub Pages
+
+La landing page con calendario interactivo se despliega automáticamente:
+
+```
+https://zanyllect68.github.io/-snowpro-core-cof-c03
+```
+
+Para activarlo: **Settings → Pages → Source: master, / (root)**
+
+## 🤝 Contribuir
+
+¿Encontraste un error o querés agregar más contenido?
+
+1. Fork el repo
+2. Creá tu rama: `git checkout -b feature/nuevo-contenido`
+3. Commit: `git commit -m 'Agrega...'`
+4. Push: `git push origin feature/nuevo-contenido`
+5. Abrí un Pull Request
+
+## 📄 Licencia
+
+MIT &mdash; Ver [LICENSE](LICENSE) para más detalles.
+
+---
+
+<p align="center">
+  <sub>Hecho con ❤️ para la comunidad Snowflake en español</sub>
+  <br>
+  <a href="https://github.com/Zanyllect68/-snowpro-core-cof-c03">⭐ ¡Dale una estrella si te sirvió!</a>
+</p>
