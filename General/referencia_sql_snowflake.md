@@ -65,6 +65,16 @@ SELECT c.nombre, p.monto
 FROM clientes c
 INNER JOIN pagos p ON c.id = p.cliente_id;
 
+-- JOIN con USING (columna con mismo nombre)
+SELECT EXTRACT(month FROM order_date) AS order_month,
+       p.pizza_size,
+       SUM(p.price * od.quantity) AS revenue
+FROM orders o
+INNER JOIN order_details od USING(order_id)
+INNER JOIN pizzas p USING(pizza_id)
+GROUP BY ALL
+ORDER BY revenue DESC;
+
 SELECT c.nombre, p.monto
 FROM clientes c
 LEFT JOIN pagos p ON c.id = p.cliente_id;
