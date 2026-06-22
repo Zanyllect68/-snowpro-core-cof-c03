@@ -32,6 +32,7 @@ SELECT SPLIT(direccion, ',') AS partes_direccion FROM domicilios;
 ### 1.3 Funciones de fecha
 
 ```sql
+SELECT CURRENT_DATE, CURRENT_TIME;
 SELECT CURRENT_DATE;
 SELECT CURRENT_TIMESTAMP;
 SELECT DATEADD(day, 7, fecha_pedido) AS fecha_vencimiento FROM pedidos;
