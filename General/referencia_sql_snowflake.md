@@ -276,6 +276,18 @@ FROM clientes_json;
 -- Acceder a arrays por índice
 SELECT customer_info:tags[0]::STRING AS primer_tag FROM clientes_json;
 
+-- Acceso a múltiples campos VARIANT con filtros ILIKE y NOT NULL
+SELECT name, review_count,
+       hours:Saturday::STRING AS saturday_hours,
+       hours:Sunday::STRING AS sunday_hours
+FROM yelp_business_data
+WHERE categories ILIKE '%Restaurant%'
+    AND hours:Saturday IS NOT NULL
+    AND hours:Sunday IS NOT NULL
+    AND city = 'Philadelphia'
+    AND stars = 5
+ORDER BY review_count DESC;
+
 -- FLATTEN: desanidar arrays/objetos en filas
 SELECT * FROM TABLE(FLATTEN(INPUT => PARSE_JSON('{"a":1,"b":2}')));
 -- Columnas: SEQ, KEY, PATH, INDEX, VALUE, THIS
