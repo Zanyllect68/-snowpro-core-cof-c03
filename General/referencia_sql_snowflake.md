@@ -86,6 +86,18 @@ FROM orders AS o
 LEFT JOIN order_details AS od ON o.order_id = od.order_id
 LEFT JOIN pizzas AS p ON od.pizza_id = p.pizza_id;
 
+-- LEFT + RIGHT + NATURAL JOIN combinados
+SELECT COUNT(o.order_id) AS total_orders,
+       AVG(p.price) AS average_price,
+       SUM(p.price * od.quantity) AS total_revenue,
+       pt.name AS pizza_name
+FROM orders AS o
+LEFT JOIN order_details AS od ON o.order_id = od.order_id
+RIGHT JOIN pizzas p ON od.pizza_id = p.pizza_id
+NATURAL JOIN pizza_type AS pt
+GROUP BY pt.name, pt.category
+ORDER BY total_revenue DESC, total_orders DESC;
+
 SELECT c.nombre, p.monto
 FROM clientes c
 RIGHT JOIN pagos p ON c.id = p.cliente_id;
