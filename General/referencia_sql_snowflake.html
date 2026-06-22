@@ -288,6 +288,13 @@ SELECT c.nombre, p.monto
 FROM clientes c
 LEFT JOIN pagos p ON c.id = p.cliente_id;
 
+SELECT COUNT(o.order_id) AS total_orders,
+       AVG(p.price) AS average_price,
+       SUM(p.price * od.quantity) AS total_revenue
+FROM orders AS o
+LEFT JOIN order_details AS od ON o.order_id = od.order_id
+LEFT JOIN pizzas AS p ON od.pizza_id = p.pizza_id;
+
 SELECT c.nombre, p.monto
 FROM clientes c
 RIGHT JOIN pagos p ON c.id = p.cliente_id;
