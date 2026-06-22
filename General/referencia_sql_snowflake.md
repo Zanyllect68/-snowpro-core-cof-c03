@@ -841,6 +841,22 @@ SELECT o.order_id, o.order_date, od.pizza_id, od.quantity
 FROM orders_filtradas o
 JOIN order_details od ON o.order_id = od.order_id;
 
+-- Múltiples CTE de filtrado antes de JOIN
+WITH filtered_orders AS (
+    SELECT order_id, order_date
+    FROM orders
+    WHERE order_date > '2015-11-01'
+), filtered_pizza_type AS (
+    SELECT name, pizza_type_id
+    FROM pizza_type
+    WHERE category = 'Veggie'
+)
+SELECT fo.order_id, fo.order_date, fpt.name, od.quantity
+FROM filtered_orders AS fo
+JOIN order_details AS od ON fo.order_id = od.order_id
+JOIN pizzas AS p ON od.pizza_id = p.pizza_id
+JOIN filtered_pizza_type AS fpt ON p.pizza_type_id = fpt.pizza_type_id;
+
 -- LIMIT reduce tiempo y costo en exploración
 SELECT * FROM orders ORDER BY order_id LIMIT 10;
 
