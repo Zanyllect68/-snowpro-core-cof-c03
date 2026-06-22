@@ -363,8 +363,8 @@ CREATE OR REPLACE TABLE products (
 );
 
 CREATE OR REPLACE TABLE orders (
-    invoiceno VARCHAR,
-    invoicedate TIMESTAMP,
+    invoiceno VARCHAR(10),
+    invoicedate TIMESTAMP_NTZ(9),
     unitprice NUMBER(10,2),
     quantity NUMBER(38,0)
 );
