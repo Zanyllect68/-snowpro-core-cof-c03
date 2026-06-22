@@ -39,6 +39,11 @@ SELECT DATEADD(day, 7, fecha_pedido) AS fecha_vencimiento FROM pedidos;
 SELECT DATEDIFF(day, fecha_inicio, fecha_fin) AS dias FROM periodos;
 SELECT DATE_TRUNC(month, fecha) AS mes FROM ventas;
 SELECT EXTRACT(year FROM fecha_pedido) AS año FROM pedidos;
+SELECT COUNT(*) AS orders_per_day,
+       EXTRACT(weekday FROM order_date) AS order_day
+FROM orders
+GROUP BY order_day
+ORDER BY orders_per_day DESC;
 SELECT LAST_DAY(fecha) AS fin_mes FROM calendario;
 ```
 
