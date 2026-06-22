@@ -99,6 +99,16 @@ FROM pizzas
 NATURAL JOIN pizza_type
 WHERE category = 'Classic';
 
+-- NATURAL JOIN cadena: order_details → pizzas → pizza_type
+SELECT pt.category,
+       SUM(p.price * od.quantity) AS total_revenue
+FROM order_details AS od
+NATURAL JOIN pizzas AS p
+NATURAL JOIN pizza_type AS pt
+GROUP BY pt.category
+ORDER BY total_revenue DESC
+LIMIT 5;
+
 -- LATERAL JOIN: subconsulta accede a columnas de tabla anterior
 SELECT p.pizza_id, pt.name, pt.category
 FROM pizzas p,
