@@ -157,6 +157,22 @@ WHERE price = (
     SELECT MAX(price) FROM pizzas
     WHERE pizza_type_id = p.pizza_type_id
 );
+
+-- Subconsulta en HAVING con AVG de agregación anidada
+SELECT pt.name, pt.category, SUM(od.quantity) AS total_orders
+FROM pizza_type pt
+JOIN pizzas p ON pt.pizza_type_id = p.pizza_type_id
+JOIN order_details od ON p.pizza_id = od.pizza_id
+GROUP BY ALL
+HAVING SUM(od.quantity) < (
+    SELECT AVG(total_quantity)
+    FROM (
+        SELECT SUM(od.quantity) AS total_quantity
+        FROM pizzas p
+        JOIN order_details od ON p.pizza_id = od.pizza_id
+        GROUP BY p.pizza_id
+    ) AS avg_sub
+);
 ```
 
 ### 1.7 CTEs (WITH)
