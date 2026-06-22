@@ -47,6 +47,7 @@ Abre [`index.html`](index.html) — calendario interactivo con plan día por dí
 | [`General/plan_estudio_snowpro_core.md`](General/plan_estudio_snowpro_core.md) | 21 temas extendidos NO cubiertos en las 30 preguntas |
 | [`General/plan_horario_detallado.md`](General/plan_horario_detallado.md) | Cronograma día por día (30 días, 60 horas totales) |
 | [`General/Tutorial Snowflake - Principiante a Experto.md`](General/Tutorial%20Snowflake%20-%20Principiante%20a%20Experto.md) | Tutorial completo desde cero |
+| [`General/referencia_sql_snowflake.md`](General/referencia_sql_snowflake.md) | Referencia SQL completa con ejemplos por categoría |
 
 ### 4. Por dominio
 
