@@ -21,6 +21,7 @@ SELECT INITCAP(pizza_type_id) AS capitalized_pizza_id FROM pizza_type;
 SELECT UPPER(nombre) AS nombre_mayuscula FROM clientes;
 SELECT LOWER(email) AS email_minuscula FROM usuarios;
 SELECT CONCAT(nombre, ' ', apellido) AS nombre_completo FROM empleados;
+SELECT CONCAT(name, ' - ', category) AS name_and_category FROM pizza_type;
 SELECT SUBSTR(descripcion, 1, 10) AS resumen FROM productos;
 SELECT TRIM('  texto  ') AS limpio;
 SELECT REPLACE(telefono, '-', '') AS telefono_limpio FROM contactos;
