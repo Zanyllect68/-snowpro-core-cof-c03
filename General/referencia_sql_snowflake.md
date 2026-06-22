@@ -86,6 +86,31 @@ RIGHT JOIN pagos p ON c.id = p.cliente_id;
 SELECT c.nombre, p.monto
 FROM clientes c
 FULL OUTER JOIN pagos p ON c.id = p.cliente_id;
+
+-- NATURAL JOIN: empareja columnas con mismo nombre, sin ON
+SELECT pizza_type_id, name, category
+FROM pizzas
+NATURAL JOIN pizza_type;
+-- Evita columnas duplicadas (no aparece pizza_type_id dos veces)
+
+-- NATURAL JOIN con filtro WHERE
+SELECT pizza_type_id, name, category
+FROM pizzas
+NATURAL JOIN pizza_type
+WHERE category = 'Classic';
+
+-- LATERAL JOIN: subconsulta accede a columnas de tabla anterior
+SELECT p.pizza_id, pt.name, pt.category
+FROM pizzas p,
+LATERAL (SELECT * FROM pizza_type pt WHERE pt.pizza_type_id = p.pizza_type_id) pt;
+
+-- LATERAL JOIN: ejemplo con cálculo por pedido
+SELECT o.order_id, t.total_cost
+FROM orders o,
+LATERAL (SELECT SUM(p.price * od.quantity) AS total_cost
+         FROM order_details od
+         JOIN pizzas p ON od.pizza_id = p.pizza_id
+         WHERE od.order_id = o.order_id) t;
 ```
 
 ### 1.6 CTEs (WITH)
