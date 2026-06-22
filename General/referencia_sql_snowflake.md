@@ -288,6 +288,15 @@ WHERE categories ILIKE '%Restaurant%'
     AND stars = 5
 ORDER BY review_count DESC;
 
+-- Acceso a atributos anidados en VARIANT con ILIKE
+SELECT business_id, name
+FROM yelp_business_data
+WHERE categories ILIKE '%Restaurant%'
+    AND attributes:DogsAllowed ILIKE '%True%'
+    AND attributes:BusinessAcceptsCreditCards ILIKE '%True%'
+    AND city ILIKE '%Philadelphia%'
+    AND stars = 5;
+
 -- FLATTEN: desanidar arrays/objetos en filas
 SELECT * FROM TABLE(FLATTEN(INPUT => PARSE_JSON('{"a":1,"b":2}')));
 -- Columnas: SEQ, KEY, PATH, INDEX, VALUE, THIS
