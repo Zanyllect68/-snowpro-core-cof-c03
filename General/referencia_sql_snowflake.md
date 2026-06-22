@@ -369,6 +369,11 @@ CREATE OR REPLACE TABLE orders (
     quantity NUMBER(38,0)
 );
 
+CREATE OR REPLACE TABLE customers (
+    customerid NUMBER(38,0) PRIMARY KEY,
+    country VARCHAR(255)
+);
+
 -- Tipos de tabla
 CREATE PERMANENT TABLE p (id INT);     -- Durable, 1-90d Time Travel
 CREATE TRANSIENT TABLE t (id INT);     -- Durable, max 1d Time Travel
